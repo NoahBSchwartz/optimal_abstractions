@@ -16,12 +16,13 @@ from joblib import Parallel, delayed
 
 log_filename    = "logs/verification_log.txt"
 MODEL_DIR       = 'model_pkls'
-FILENAME_FILTER = ["xy"]
+FILENAME_FILTER = []
+EXCLUDE         = ["cifar", "acopf_ml4aconpf2"]
 SEGMENT_COUNTS  = [2, 3, 4, 5, 6, 7, 8]
 INPUT_WIDTHS    = [0.01, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0]
 TIME_LIMIT      = 2000
 MIP_GAP         = 0.05
-MAX_SEGMENTS    = SEGMENT_COUNTS[-1]
+MAX_SEGMENTS    = max(50, 2 * SEGMENT_COUNTS[-1])  
 FIXED_IW        = INPUT_WIDTHS[-1]   # total input-box width; bounds are +-FIXED_IW/2 (bug fix 4)
 
 # Curve-sampling grid sizes for domain-aware fitting (bug fix 1)
@@ -670,7 +671,7 @@ sys.stderr = sys.stdout
 print(f"Logging started. Writing to {log_filename}...")
 
 files = sorted(os.listdir(MODEL_DIR))
-files = [f for f in files if any(fn in f for fn in FILENAME_FILTER) and "_kan_model.pkl" in f]
+files = [f for f in files if (not FILENAME_FILTER or any(fn in f for fn in FILENAME_FILTER)) and "_kan_model.pkl" in f and not any(ex in f for ex in EXCLUDE)]
 pairs = {}
 
 for f in files:
@@ -718,7 +719,7 @@ def allocate_segments_under_budget(weighted_error_tables, total_budget):
 graph_data = {}
 curves_by_prefix, shape_by_prefix, tables_by_prefix = {}, {}, {}
 
-for prefix, pair in pairs.items():
+for prefix, pair in sorted(pairs.items(), key=lambda kv: os.path.getsize(os.path.join(MODEL_DIR, kv[1]["kan"]))):
     if "kan" not in pair: continue
     print(f"\n=== {prefix} ===")
 
@@ -949,7 +950,7 @@ ax3.legend(fontsize=7)
 fig.suptitle("KAN Verification across model sizes", fontsize=13)
 plt.tight_layout()
 plt.savefig("plots/verification_multi_kan.png", bbox_inches="tight", dpi=300)
-plt.show()
+plt.close(fig)
 
 
 def build_uniform_segments(x_high, y_high, k):
@@ -1036,4 +1037,4 @@ ax2.legend(fontsize=6, loc='best')
 fig.suptitle("True Vanilla (uniform breakpoints) vs Vanilla (DP) vs Optimized", fontsize=13)
 plt.tight_layout()
 plt.savefig("plots/true_vanilla_comparison.png", bbox_inches="tight", dpi=300)
-plt.show()
+plt.close(fig)
