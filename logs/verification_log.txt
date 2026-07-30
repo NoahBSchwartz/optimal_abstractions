@@ -1,91 +1,91 @@
 Logging started. Writing to logs/verification_log.txt...
 
 === functionxy ===
-  theoretical min error: 0.0400, n_splines: 6, dp_time: 0.760s
+  theoretical min error: 0.0400, n_splines: 6, dp_time: 0.730s
   Testing total segment budget: 6 (k=1 per spline for Van)
 Set parameter Username
 Set parameter LicenseID to value 2849196
 Academic license - for non-commercial use only - expires 2027-07-29
 Set parameter Presolve to value 2
-    Opt k=1 (budget=6): width=4.6217, ilp=0.009s, milp=0.016s
+    Opt k=1 (budget=6): width=4.6217, ilp=0.008s, milp=0.016s
 Set parameter Presolve to value 2
-    Van k=1: width=4.6217, milp=0.013s
+    Van k=1: width=4.6217, milp=0.014s
   Testing total segment budget: 30 (k=5 per spline for Van)
 Set parameter Presolve to value 2
-    Opt k=5 (budget=30): width=2.7705, ilp=0.007s, milp=0.013s
+    Opt k=5 (budget=30): width=2.7705, ilp=0.007s, milp=0.014s
 Set parameter Presolve to value 2
     Van k=5: width=2.6891, milp=0.014s
   Testing total segment budget: 60 (k=10 per spline for Van)
 Set parameter Presolve to value 2
     Opt k=10 (budget=60): width=2.0440, ilp=0.006s, milp=0.027s
 Set parameter Presolve to value 2
-    Van k=10: width=2.1404, milp=0.024s
+    Van k=10: width=2.1404, milp=0.026s
   Testing total segment budget: 120 (k=20 per spline for Van)
 Set parameter Presolve to value 2
     Opt k=20 (budget=120): width=1.8908, ilp=0.011s, milp=0.076s
 Set parameter Presolve to value 2
-    Van k=20: width=1.8998, milp=0.040s
+    Van k=20: width=1.8998, milp=0.049s
   Testing total segment budget: 180 (k=30 per spline for Van)
 Set parameter Presolve to value 2
-    Opt k=30 (budget=180): width=1.8438, ilp=0.006s, milp=0.085s
+    Opt k=30 (budget=180): width=1.8438, ilp=0.006s, milp=0.089s
 Set parameter Presolve to value 2
-    Van k=30: width=1.8459, milp=0.051s
+    Van k=30: width=1.8459, milp=0.050s
   Testing total segment budget: 240 (k=40 per spline for Van)
 Set parameter Presolve to value 2
-    Opt k=40 (budget=240): width=1.8235, ilp=0.017s, milp=0.124s
+    Opt k=40 (budget=240): width=1.8235, ilp=0.007s, milp=0.126s
 Set parameter Presolve to value 2
-    Van k=40: width=1.8313, milp=0.137s
+    Van k=40: width=1.8313, milp=0.140s
   Testing total segment budget: 300 (k=50 per spline for Van)
 Set parameter Presolve to value 2
-    Opt k=50 (budget=300): width=1.8191, ilp=0.004s, milp=0.076s
+    Opt k=50 (budget=300): width=1.8191, ilp=0.004s, milp=0.075s
 Set parameter Presolve to value 2
-    Van k=50: width=1.8236, milp=0.062s
+    Van k=50: width=1.8236, milp=0.061s
   Input sweep allocations: delta-based uses 182 segments (30.3/spline); equal-budget uses 60 (Van k=10 uses 60)
   Testing input width: 0.01 (bounds=(-0.005, 0.005))
 Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=0.0391, milp=0.015s
+    Opt (delta, 182 segs): width=0.0391, milp=0.013s
 Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=0.2351, milp=0.014s
+    Opt (eq-budget, 60 segs): width=0.2351, milp=0.013s
 Set parameter Presolve to value 2
     Van k=10: width=0.2594, milp=0.014s
   Testing input width: 0.05 (bounds=(-0.025, 0.025))
 Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=0.0419, milp=0.014s
+    Opt (delta, 182 segs): width=0.0419, milp=0.013s
 Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=0.2464, milp=0.012s
+    Opt (eq-budget, 60 segs): width=0.2464, milp=0.014s
 Set parameter Presolve to value 2
-    Van k=10: width=0.2688, milp=0.012s
+    Van k=10: width=0.2688, milp=0.013s
   Testing input width: 0.1 (bounds=(-0.050, 0.050))
 Set parameter Presolve to value 2
     Opt (delta, 182 segs): width=0.0513, milp=0.014s
 Set parameter Presolve to value 2
     Opt (eq-budget, 60 segs): width=0.2541, milp=0.014s
 Set parameter Presolve to value 2
-    Van k=10: width=0.2820, milp=0.013s
+    Van k=10: width=0.2820, milp=0.012s
   Testing input width: 0.5 (bounds=(-0.250, 0.250))
 Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=0.1729, milp=0.017s
+    Opt (delta, 182 segs): width=0.1729, milp=0.014s
 Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=0.4525, milp=0.022s
+    Opt (eq-budget, 60 segs): width=0.4525, milp=0.014s
 Set parameter Presolve to value 2
-    Van k=10: width=0.4828, milp=0.015s
+    Van k=10: width=0.4828, milp=0.014s
   Testing input width: 1.0 (bounds=(-0.500, 0.500))
 Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=0.5677, milp=0.012s
+    Opt (delta, 182 segs): width=0.5677, milp=0.013s
 Set parameter Presolve to value 2
     Opt (eq-budget, 60 segs): width=0.9163, milp=0.014s
 Set parameter Presolve to value 2
-    Van k=10: width=1.0034, milp=0.014s
+    Van k=10: width=1.0034, milp=0.012s
   Testing input width: 2.0 (bounds=(-1.000, 1.000))
 Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=1.8438, milp=0.012s
+    Opt (delta, 182 segs): width=1.8438, milp=0.014s
 Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=2.0427, milp=0.012s
+    Opt (eq-budget, 60 segs): width=2.0427, milp=0.013s
 Set parameter Presolve to value 2
     Van k=10: width=2.1399, milp=0.013s
   Testing input width: 5.0 (bounds=(-2.500, 2.500))
 Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=1.8438, milp=0.052s
+    Opt (delta, 182 segs): width=1.8438, milp=0.049s
 Set parameter Presolve to value 2
     Opt (eq-budget, 60 segs): width=2.0440, milp=0.026s
 Set parameter Presolve to value 2
@@ -97,15 +97,15 @@ TIMING SUMMARY
 Saved graph data to logs/graph_data_functionxy.json
 
 functionxy  (60 params)
-  DP abstraction (one-time): 0.760s
+  DP abstraction (one-time): 0.730s
      k     ILP (s)    MILP (s)     Van (s)
-     1       0.009       0.016       0.013
-     5       0.007       0.013       0.014
-    10       0.006       0.027       0.024
-    20       0.011       0.076       0.040
-    30       0.006       0.085       0.051
-    40       0.017       0.124       0.137
-    50       0.004       0.076       0.062
+     1       0.008       0.016       0.014
+     5       0.007       0.014       0.014
+    10       0.006       0.027       0.026
+    20       0.011       0.076       0.049
+    30       0.006       0.089       0.050
+    40       0.007       0.126       0.140
+    50       0.004       0.075       0.061
 ============================================================
 
 === True Vanilla: functionxy ===
@@ -116,9 +116,9 @@ Set parameter Presolve to value 2
 Set parameter Presolve to value 2
     True Van k=10: width=3.0852, milp=0.024s
 Set parameter Presolve to value 2
-    True Van k=20: width=2.2943, milp=0.024s
+    True Van k=20: width=2.2943, milp=0.034s
 Set parameter Presolve to value 2
-    True Van k=30: width=2.0472, milp=0.034s
+    True Van k=30: width=2.0472, milp=0.035s
 Set parameter Presolve to value 2
     True Van k=40: width=1.9064, milp=0.057s
 Set parameter Presolve to value 2
