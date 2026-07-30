@@ -897,7 +897,7 @@ for p in sorted(prefixes, key=lambda p: graph_data[p]["n_params"]):
         print(f"  {k:>4}  {ilp_t:>10.3f}  {milp_t:>10.3f}  {van_t:>10.3f}")
 print("=" * 60)
 
-plt.rcParams['text.usetex'] = (sys.platform == "darwin")
+plt.rcParams['text.usetex'] = False
 plt.rcParams['font.family'] = 'sans-serif'
 plt.rcParams['font.serif'] = ['Computer Modern']
 plt.rcParams['text.latex.preamble'] = r'\usepackage{amsmath, amssymb}'
