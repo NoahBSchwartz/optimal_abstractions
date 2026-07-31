@@ -1399,3 +1399,471 @@ Set parameter Presolve to value -1
 Set parameter Method to value 6
 Set parameter TimeLimit to value 1000
 Set parameter Presolve to value -1
+    Van k=6: width=3.5831, milp=1327.615s
+  Testing total segment budget: 1148 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt k=7 (budget=1148): width=3.4380, ilp=0.007s, milp=668.199s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=7: width=3.4380, milp=854.669s
+  Input sweep allocations: delta-based uses 820 segments (5.0/spline); equal-budget uses 820 (Van k=5 uses 820)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 820 segs): width=3.4274, milp=0.057s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 820 segs): width=3.4274, milp=0.036s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=3.4685, milp=0.108s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 820 segs): width=3.4477, milp=0.036s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 820 segs): width=3.4477, milp=0.056s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=3.4713, milp=0.159s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 820 segs): width=3.4499, milp=0.088s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 820 segs): width=3.4499, milp=0.098s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=3.4936, milp=0.211s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 820 segs): width=3.4851, milp=0.323s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 820 segs): width=3.4851, milp=0.321s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=3.6943, milp=0.444s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 820 segs): width=3.5933, milp=0.363s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 820 segs): width=3.5933, milp=0.373s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=3.6931, milp=0.459s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 820 segs): width=3.6326, milp=48.911s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 820 segs): width=3.6326, milp=48.205s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=3.7494, milp=11.628s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 820 segs): width=3.6392, milp=373.431s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 820 segs): width=3.6392, milp=373.238s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=3.7518, milp=8.751s
+Saved graph data to logs/graph_data_funcnoise.json
+
+============================================================
+TIMING SUMMARY
+============================================================
+
+functionbessel  (20 params)
+  DP abstraction (one-time): 0.097s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.316       0.018       0.014
+     3       0.000       0.013       0.013
+     4       0.000       0.013       0.013
+     5       0.000       0.013       0.013
+     6       0.000       0.013       0.014
+     7       0.000       0.013       0.013
+
+functionexp  (30 params)
+  DP abstraction (one-time): 0.044s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.002       0.013       0.013
+     3       0.001       0.013       0.013
+     4       0.001       0.014       0.013
+     5       0.001       0.013       0.013
+     6       0.001       0.013       0.013
+     7       0.000       0.013       0.013
+
+functionxy  (60 params)
+  DP abstraction (one-time): 0.068s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.002       0.016       0.014
+     3       0.003       0.014       0.014
+     4       0.002       0.015       0.015
+     5       0.002       0.015       0.014
+     6       0.002       0.015       0.015
+     7       0.001       0.016       0.015
+
+funcellipeinc  (70 params)
+  DP abstraction (one-time): 0.059s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.003       0.014       0.014
+     3       0.001       0.014       0.016
+     4       0.002       0.017       0.015
+     5       0.002       0.016       0.014
+     6       0.002       0.024       0.016
+     7       0.001       0.015       0.015
+
+funcellipkinc  (70 params)
+  DP abstraction (one-time): 0.047s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.004       0.017       0.015
+     3       0.002       0.016       0.015
+     4       0.001       0.014       0.016
+     5       0.002       0.016       0.016
+     6       0.002       0.026       0.014
+     7       0.001       0.016       0.013
+
+functionlegendre  (100 params)
+  DP abstraction (one-time): 0.070s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.003       0.015       0.014
+     3       0.001       0.025       0.014
+     4       0.002       0.066       0.025
+     5       0.002       0.088       0.090
+     6       0.003       0.119       0.150
+     7       0.001       0.088       0.098
+
+funcsphharm  (140 params)
+  DP abstraction (one-time): 0.071s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.004       0.015       0.014
+     3       0.003       0.016       0.015
+     4       0.003       0.014       0.025
+     5       0.003       0.036       0.058
+     6       0.003       0.047       0.045
+     7       0.002       0.047       0.067
+
+functionexp4  (260 params)
+  DP abstraction (one-time): 0.075s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.004       0.015       0.014
+     3       0.003       0.014       0.024
+     4       0.003       0.087       0.088
+     5       0.003       0.127       0.455
+     6       0.003       0.424       0.596
+     7       0.001       2.365       2.350
+
+functionexp100  (1,010 params)
+  DP abstraction (one-time): 0.123s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.010       0.027       0.015
+     3       0.007       0.014       0.014
+     4       0.009       0.024       0.014
+     5       0.008       0.036       0.037
+     6       0.007       0.026       0.025
+     7       0.004       0.047       0.047
+
+funcnoise  (1,312 params)
+  DP abstraction (one-time): 0.222s
+     k     ILP (s)    MILP (s)     Van (s)
+     2       0.014       0.029       0.057
+     3       0.016       0.215       0.183
+     4       0.015       0.393       3.096
+     5       0.015     373.204       8.583
+     6       0.034     292.770    1327.615
+     7       0.007     668.199     854.669
+============================================================
+
+=== True Vanilla: functionbessel ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=3.5912, milp=0.015s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=2.1427, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=3.4098, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=1.7935, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=3.1401, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=2.8648, milp=0.013s
+
+=== True Vanilla: functionexp ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=12.4692, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=15.5486, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=13.2519, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=13.0502, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=10.9824, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=10.5161, milp=0.014s
+
+=== True Vanilla: functionxy ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=5.4272, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=4.4134, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=5.1889, milp=0.015s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=4.3208, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=3.5719, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=3.2015, milp=0.023s
+
+=== True Vanilla: functionlegendre ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=16.4725, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=16.2391, milp=0.023s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=15.8234, milp=0.024s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=15.1562, milp=0.025s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=13.6079, milp=0.046s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=13.0299, milp=0.023s
+
+=== True Vanilla: funcellipeinc ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=4.8874, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=4.9173, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=8.3229, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=4.8144, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=5.6099, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=5.5860, milp=0.023s
+
+=== True Vanilla: funcellipkinc ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=8.5587, milp=0.015s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=8.4395, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=12.6516, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=8.2462, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=8.9935, milp=0.013s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=7.4147, milp=0.013s
+
+=== True Vanilla: funcsphharm ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=6.0889, milp=0.015s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=6.8170, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=8.4984, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=5.6833, milp=0.023s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=6.1431, milp=0.024s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=6.0912, milp=0.023s
+
+=== True Vanilla: functionexp4 ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=10.5040, milp=0.015s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=10.7130, milp=0.014s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=13.8650, milp=0.057s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=9.8209, milp=0.024s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=10.9472, milp=0.024s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=8.6630, milp=0.035s
+
+=== True Vanilla: functionexp100 ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=3.9925, milp=0.015s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=3.2818, milp=0.015s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=2.5351, milp=0.015s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=2.5503, milp=0.037s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=2.1080, milp=0.016s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=2.3173, milp=0.046s
+
+=== True Vanilla: funcnoise ===
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=2: width=5.2563, milp=0.026s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=3: width=5.0164, milp=0.046s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=4: width=5.0253, milp=0.128s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=5: width=4.6167, milp=0.112s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=6: width=4.4772, milp=0.640s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    True Van k=7: width=4.2421, milp=1.243s

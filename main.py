@@ -16,8 +16,8 @@ from joblib import Parallel, delayed
 log_filename    = "logs/verification_log.txt"
 MODEL_DIR       = 'model_pkls'
 # FILENAME_FILTER = ["xy", "exp100", "pinn", "exp4"]
-# FILENAME_FILTER = ["prosthetic", "weather", "acopf_ml4acopf_"]
-FILENAME_FILTER = ["func"]
+FILENAME_FILTER = ["prosthetic", "weather", "acopf_ml4acopf_"]
+# FILENAME_FILTER = ["func"]
 EXCLUDE         = []
 SEGMENT_COUNTS  = [2, 3, 4, 5, 6, 7]
 INPUT_WIDTHS    = [0.01, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0]
@@ -54,7 +54,6 @@ class RadialBasisFunction(nn.Module):
 
     def forward(self, x):
         return torch.exp(-((x[..., None] - self.grid) / self.denominator) ** 2)
-
 
 class FastKANLayer(nn.Module):
     def __init__(self, input_dim: int, output_dim: int, grid_min: float = -2., grid_max: float = 2., num_grids: int = 8, use_base_update: bool = True, use_layernorm: bool = True, base_activation=F.silu, spline_weight_init_scale: float = 0.1) -> None:
