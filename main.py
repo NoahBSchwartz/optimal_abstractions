@@ -1038,6 +1038,17 @@ for prefix in graph_data.keys():
         w = width(mn, mx)
         print(f"    True Van k={k}: width={w:.4f}, milp={t:.3f}s")
         pareto.append((t, w))
+
+        save_path = f"logs/graph_data_{prefix}.json"
+        try:
+            with open(save_path) as f:
+                payload = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            payload = {"filename": prefix, "SEGMENT_COUNTS": SEGMENT_COUNTS,
+                       "INPUT_WIDTHS": INPUT_WIDTHS, "graph_data": {prefix: {}}}
+        payload["graph_data"][prefix]["true_van_pareto"] = _to_python(pareto)
+        with open(save_path, "w") as f:
+            json.dump(payload, f, indent=2)
     true_van_results[prefix] = pareto
 
 sorted_p = sorted(prefixes, key=lambda p: graph_data[p]["n_params"])
