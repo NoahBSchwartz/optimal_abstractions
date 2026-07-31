@@ -16,7 +16,7 @@ from joblib import Parallel, delayed
 log_filename    = "logs/verification_log.txt"
 MODEL_DIR       = 'model_pkls'
 # FILENAME_FILTER = ["xy", "exp100", "pinn", "exp4"]
-FILENAME_FILTER = ["prosthetic", "weather", "acopf_ml4acopf_"]
+FILENAME_FILTER = ["xy", "exp100"]#"prosthetic", "weather", "acopf_ml4acopf_"]
 # FILENAME_FILTER = ["func"]
 EXCLUDE         = []
 SEGMENT_COUNTS  = [2, 3, 4, 5, 6, 7]
@@ -742,6 +742,29 @@ def _to_python(obj):
         return [_to_python(v) for v in obj.tolist()]
     return obj
 
+def build_uniform_segments(x_high, y_high, k):
+    n = len(x_high)
+    sample_indices = np.linspace(0, n - 1, k + 1, dtype=int)
+    segments = []
+    for i_start, i_end in zip(sample_indices[:-1], sample_indices[1:]):
+        x1, y1 = x_high[i_start], y_high[i_start]
+        x2, y2 = x_high[i_end], y_high[i_end]
+        slope, intercept = fit_line_through_points(x1, y1, x2, y2)
+        segments.append((x1, x2, slope, intercept))
+    return segments
+
+
+def compute_true_vanilla_tables(curves, k):
+    segments_tables = {}
+    error_tables = {}
+    for key, (x_high, y_high) in curves.items():
+        segs = build_uniform_segments(x_high, y_high, k)
+        err = validate_segments_error(segs, x_high, y_high)
+        segments_tables[key] = {k: segs}
+        error_tables[key] = {k: err}
+    return error_tables, segments_tables
+
+
 graph_data = {}
 curves_by_prefix, shape_by_prefix, tables_by_prefix = {}, {}, {}
 
@@ -840,6 +863,9 @@ for prefix, pair in sorted(pairs.items(), key=lambda kv: os.path.getsize(os.path
     opt_input_sweep = []
     opt_input_sweep_eq = []
     van_input_sweep = []
+    uni_input_sweep = []
+    uni_err_mid, uni_seg_mid = compute_true_vanilla_tables(curves, K_MID)
+    uni_alloc_mid = {key: K_MID for key in uni_seg_mid.keys()}
     for iw in INPUT_WIDTHS:
         lb_w, ub_w = _normalize_bounds(-iw / 2, iw / 2, in_dim)
         print(f"  Testing input width: {iw} (bounds=({lb_w[0]:.3f}, {ub_w[0]:.3f}))")
@@ -869,6 +895,12 @@ for prefix, pair in sorted(pairs.items(), key=lambda kv: os.path.getsize(os.path
         van_input_sweep.append((iw, width(mn, mx), t))
         print(f"    Van k={K_MID}: width={width(mn, mx):.4f}, milp={t:.3f}s")
 
+        t0 = time.time()
+        mn, mx = solve_kan_interval_milp(kan_shape, uni_seg_mid, uni_err_mid, uni_alloc_mid, MIP_GAP, lb_w, ub_w, TIME_LIMIT)
+        t = time.time() - t0
+        uni_input_sweep.append((iw, width(mn, mx), t))
+        print(f"    Uniform k={K_MID}: width={width(mn, mx):.4f}, milp={t:.3f}s")
+
     graph_data[prefix] = {
         'n_params': n_params,
         'opt_pareto': opt_pareto,
@@ -876,6 +908,7 @@ for prefix, pair in sorted(pairs.items(), key=lambda kv: os.path.getsize(os.path
         'opt_input_sweep': opt_input_sweep,
         'opt_input_sweep_eqbudget': opt_input_sweep_eq,
         'van_input_sweep': van_input_sweep,
+        'true_van_input_sweep': uni_input_sweep,
         'delta_alloc_segments': n_delta,
         'eq_alloc_segments': n_eq,
         'mid_alloc_segments': K_MID * n_splines,    
@@ -991,32 +1024,6 @@ fig.suptitle("KAN Verification across model sizes", fontsize=13)
 plt.tight_layout()
 plt.savefig("plots/verification_multi_kan.png", bbox_inches="tight", dpi=300)
 plt.close(fig)
-
-
-def build_uniform_segments(x_high, y_high, k):
-    n = len(x_high)
-    sample_indices = np.linspace(0, n - 1, k + 1, dtype=int)
-    segments = []
-    for i_start, i_end in zip(sample_indices[:-1], sample_indices[1:]):
-        x1, y1 = x_high[i_start], y_high[i_start]
-        x2, y2 = x_high[i_end], y_high[i_end]
-        slope, intercept = fit_line_through_points(x1, y1, x2, y2)
-        segments.append((x1, x2, slope, intercept))
-    return segments
-
-
-def compute_true_vanilla_tables(curves, k):
-    # Bug fixes 1/10: the uniform-breakpoint baseline is built from the same
-    # domain-aware curves as the other methods (previously it re-sampled the
-    # fixed window).
-    segments_tables = {}
-    error_tables = {}
-    for key, (x_high, y_high) in curves.items():
-        segs = build_uniform_segments(x_high, y_high, k)
-        err = validate_segments_error(segs, x_high, y_high)
-        segments_tables[key] = {k: segs}
-        error_tables[key] = {k: err}
-    return error_tables, segments_tables
 
 
 true_van_results = {}
