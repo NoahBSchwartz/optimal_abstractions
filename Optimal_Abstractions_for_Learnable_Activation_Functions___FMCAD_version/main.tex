@@ -1,0 +1,107 @@
+\begin{filecontents*}{\jobname.xmpdata}
+\Title{Optimized Piecewise Affine Abstractions of Neural Networks with Learnable Activation Functions}
+\Author{Noah Schwartz*\sep Chandra Kanth Nagesh*\sep Sriram Sankaranarayanan\sep Ramneet Kaur\sep Tuhin Sahai\sep Susmit Jha}
+\Publisher{TU Wien Academic Press}
+\end{filecontents*}
+
+\documentclass[year=26,pdfa]{fmcad}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs} % for professional tables
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{url}  
+\usepackage{pgfplots} % simple URL typesetting
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{xcolor}         % colors
+\usepackage{paralist, wrapfig}
+\usepackage{comment}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\usepackage{tikz}
+\usepackage{multirow} 
+\usepackage{multicol}
+\usepackage{tikz-cd}
+\usepackage{siunitx}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{shapes,arrows,positioning,calc}
+\usetikzlibrary{decorations.markings,decorations.pathmorphing, calligraphy, patterns}
+\usetikzlibrary{decorations.pathreplacing, backgrounds, fit}
+
+% if you use cleveref..
+\usepackage[capitalize,noabbrev]{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{definition}{Definition}
+\newtheorem{problem}{Problem}
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\usepackage{thmtools}
+\usepackage{thm-restate}
+
+
+\input{commands}
+
+\begin{document}
+\title{Optimized Piecewise Affine Abstractions of Neural Networks with Learnable Activation Functions}
+\author{%
+\IEEEauthorblockN{%
+Noah Schwartz*\IEEEauthorrefmark{2}\,,
+Chandra Kanth Nagesh*\IEEEauthorrefmark{2}\,\orcid{0000-0003-2122-396X},
+Sriram Sankaranarayanan\IEEEauthorrefmark{2}\,\orcid{0000-0001-7315-4340}\\
+Ramneet Kaur\IEEEauthorrefmark{3},
+Tuhin Sahai\IEEEauthorrefmark{3},
+Susmit Jha\IEEEauthorrefmark{4}}
+%
+\IEEEauthorblockA{%
+\IEEEauthorrefmark{2} University of Colorado Boulder, USA. Email: first.lastname@colorado.edu}
+%
+\IEEEauthorblockA{%
+\IEEEauthorrefmark{3}SRI International. Email: first.lastname@sri.com}
+%
+\IEEEauthorblockA{%
+\IEEEauthorrefmark{4}DARPA. Email: first.lastname@darpa.mil}
+}
+
+\maketitle
+
+\begin{abstract}
+We present a generalized framework for the range verification of neural networks featuring non-linear activation functions. Our approach first constructs an ``optimized piecewise affine abstraction" of the network that replaces each non-linear activation function by a piecewise affine (PWA) function plus a bounded error. Such PWA functions are readily amenable to existing neural network verification techniques using specializations of linear arithmetic SMT solvers and mixed-integer optimization approaches. However, there are infinitely many ways to abstract each node, with a natural tradeoff between the number of pieces used, the global error bound, and the complexity of the resulting verification problem. We propose a dynamic programming (DP) algorithm to systematically compute the optimized PWA abstraction for general activation functions, guaranteeing tighter output bounds. The algorithm combines a local DP approximation at each node with a global error bound, yielding a variant of the knapsack problem for deciding how to allocate a fixed budget on the total number of pieces across units so as to minimize the worst-case error bound between the network and its approximation. Although the knapsack problem is itself NP-hard, we can use pseudo-polynomial DP algorithms as well as approximation schemes to solve it efficiently. Crucially, our approach is broadly applicable to diverse networks consisting of non-linear activations, including standard Multi-Layer Perceptrons (MLPs) and recently proposed architectures such as Kolmogorov-Arnold Networks (KANs). \textcolor{red}{On KAN benchmarks spanning 60 to 1,010 parameters, our approach yields output bounds that are significantly tighter than uniform PWA allocation, with the gap widening as networks grow. Furthermore, as the networks grow larger, the overhead of performing an abstraction pays off in terms of the computation time for solving each verification problem.}
+
+\end{abstract}
+
+\IEEEpeerreviewmaketitle
+
+\input{sections/introduction.tex}
+\input{sections/related.tex}
+\input{sections/preliminaries.tex}
+\input{sections/pwa.tex}
+\input{sections/optimal-entire.tex}
+\input{sections/milp-encoding.tex}
+\input{sections/results.tex}
+\input{sections/conclusion.tex}
+
+%\section*{Acknowledgment}
+%Will be provided in subsequent versions.
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{bare_conf}
+
+
+\newpage
+\onecolumn
+\input{sections/appendix}
+
+\end{document}
+

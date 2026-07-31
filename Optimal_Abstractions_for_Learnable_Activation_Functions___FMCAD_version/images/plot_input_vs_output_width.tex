@@ -1,0 +1,363 @@
+% This file was created with tikzplotlib v0.10.1.post13.
+\begin{tikzpicture}[font=\sffamily]
+
+\definecolor{darkgrey176}{RGB}{176,176,176}
+\definecolor{green}{RGB}{0,128,0}
+\definecolor{lightgrey204}{RGB}{204,204,204}
+
+\begin{groupplot}[group style={group size=3 by 1}]
+\nextgroupplot[
+height=0.25\textheight,
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=lightgrey204,
+  font=\footnotesize\sffamily
+},
+log basis x={10},
+log ticks with fixed point,
+tick align=outside,
+tick pos=left,
+title={Small (60 params)},
+width=0.3\textwidth,
+x grid style={darkgrey176},
+xlabel={Input Bound Width (log scale)},
+xmajorgrids,
+xmin=0.00732911438554269, xmax=6.82210665160709,
+xminorgrids,
+xmode=log,
+xtick style={color=black},
+xtick={0.0001,0.001,0.01,0.1,1,10,100},
+xticklabels={
+  \(\displaystyle {10^{-4}}\),
+  \(\displaystyle {10^{-3}}\),
+  \(\displaystyle {10^{-2}}\),
+  \(\displaystyle {10^{-1}}\),
+  \(\displaystyle {10^{0}}\),
+  \(\displaystyle {10^{1}}\),
+  \(\displaystyle {10^{2}}\)
+},
+y grid style={darkgrey176},
+ylabel={Output Bound Width},
+ymajorgrids,
+ymin=-0.0775312071143883, ymax=2.16884872430755,
+yminorgrids,
+ytick style={color=black},
+ytick={-0.25,0,0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25},
+yticklabels={
+  \(\displaystyle {\ensuremath{-}0.25}\),
+  \(\displaystyle {0.00}\),
+  \(\displaystyle {0.25}\),
+  \(\displaystyle {0.50}\),
+  \(\displaystyle {0.75}\),
+  \(\displaystyle {1.00}\),
+  \(\displaystyle {1.25}\),
+  \(\displaystyle {1.50}\),
+  \(\displaystyle {1.75}\),
+  \(\displaystyle {2.00}\),
+  \(\displaystyle {2.25}\)
+}
+]
+\addplot [thick, green, mark=diamond*, mark size=3, mark options={solid}]
+table {%
+0.01 0.0245769715866087
+0.05 0.0254125537262042
+0.1 0.0264570314006987
+0.5 0.147384466860569
+1 0.545486045073395
+2 1.81766118493742
+5 1.81536441145074
+};
+\addlegendentry{Optimized}
+\addplot [semithick, blue, opacity=0.7, dashed, mark=x, mark size=4, mark options={solid}]
+table {%
+0.01 0.274692858204614
+0.05 0.283000774754196
+0.1 0.293385670441174
+0.5 0.403390322275852
+1 0.848007414384336
+2 2.02860585366628
+5 2.06674054560655
+};
+\addlegendentry{Vanilla (DP)}
+\draw (axis cs:0.01,0.0245769715866087) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.01};
+\draw (axis cs:0.05,0.0254125537262042) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.05};
+\draw (axis cs:0.1,0.0264570314006987) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.1};
+\draw (axis cs:0.5,0.147384466860569) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.5};
+\draw (axis cs:1,0.545486045073395) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{1};
+\draw (axis cs:2,1.81766118493742) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{2};
+\draw (axis cs:5,1.81536441145074) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{5};
+
+\nextgroupplot[
+height=0.25\textheight,
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=lightgrey204,
+  font=\footnotesize\sffamily
+},
+log basis x={10},
+log ticks with fixed point,
+tick align=outside,
+tick pos=left,
+title={Medium (260 params)},
+width=0.3\textwidth,
+x grid style={darkgrey176},
+xlabel={Input Bound Width (log scale)},
+xmajorgrids,
+xmin=0.00732911438554269, xmax=6.82210665160709,
+xminorgrids,
+xmode=log,
+xtick style={color=black},
+xtick={0.0001,0.001,0.01,0.1,1,10,100},
+xticklabels={
+  \(\displaystyle {10^{-4}}\),
+  \(\displaystyle {10^{-3}}\),
+  \(\displaystyle {10^{-2}}\),
+  \(\displaystyle {10^{-1}}\),
+  \(\displaystyle {10^{0}}\),
+  \(\displaystyle {10^{1}}\),
+  \(\displaystyle {10^{2}}\)
+},
+y grid style={darkgrey176},
+ylabel={Output Bound Width},
+ymajorgrids,
+ymin=-0.0171275459492722, ymax=4.49228101738054,
+yminorgrids,
+ytick style={color=black},
+ytick={-1,0,1,2,3,4,5},
+yticklabels={
+  \(\displaystyle {\ensuremath{-}1}\),
+  \(\displaystyle {0}\),
+  \(\displaystyle {1}\),
+  \(\displaystyle {2}\),
+  \(\displaystyle {3}\),
+  \(\displaystyle {4}\),
+  \(\displaystyle {5}\)
+}
+]
+\addplot [thick, green, mark=diamond*, mark size=3, mark options={solid}]
+table {%
+0.01 0.288762571990831
+0.05 0.187845570565719
+0.1 0.187845570565719
+0.5 0.650061956417918
+1 1.82962073499393
+2 2.43554792458641
+5 2.49221146666101
+};
+\addlegendentry{Optimized}
+\addplot [semithick, blue, opacity=0.7, dashed, mark=x, mark size=4, mark options={solid}]
+table {%
+0.01 2.29377187400925
+0.05 2.33807214783653
+0.1 2.35726279376507
+0.5 2.53586816779345
+1 3.01843577165926
+2 3.50053364596989
+5 4.28730790086555
+};
+\addlegendentry{Vanilla (DP)}
+\draw (axis cs:0.01,0.288762571990831) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.01};
+\draw (axis cs:0.05,0.187845570565719) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.05};
+\draw (axis cs:0.1,0.187845570565719) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.1};
+\draw (axis cs:0.5,0.650061956417918) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.5};
+\draw (axis cs:1,1.82962073499393) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{1};
+\draw (axis cs:2,2.43554792458641) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{2};
+\draw (axis cs:5,2.49221146666101) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{5};
+
+\nextgroupplot[
+height=0.25\textheight,
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=lightgrey204,
+  font=\footnotesize\sffamily
+},
+log basis x={10},
+log ticks with fixed point,
+tick align=outside,
+tick pos=left,
+title={Large (1,010 params)},
+unbounded coords=jump,
+width=0.3\textwidth,
+x grid style={darkgrey176},
+xlabel={Input Bound Width (log scale)},
+xmajorgrids,
+xmin=0.00732911438554269, xmax=6.82210665160709,
+xminorgrids,
+xmode=log,
+xtick style={color=black},
+xtick={0.0001,0.001,0.01,0.1,1,10,100},
+xticklabels={
+  \(\displaystyle {10^{-4}}\),
+  \(\displaystyle {10^{-3}}\),
+  \(\displaystyle {10^{-2}}\),
+  \(\displaystyle {10^{-1}}\),
+  \(\displaystyle {10^{0}}\),
+  \(\displaystyle {10^{1}}\),
+  \(\displaystyle {10^{2}}\)
+},
+y grid style={darkgrey176},
+ylabel={Output Bound Width},
+ymajorgrids,
+ymin=-0.0314897228244325, ymax=1.55163728021896,
+yminorgrids,
+ytick style={color=black},
+ytick={-0.2,0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6},
+yticklabels={
+  \(\displaystyle {\ensuremath{-}0.2}\),
+  \(\displaystyle {0.0}\),
+  \(\displaystyle {0.2}\),
+  \(\displaystyle {0.4}\),
+  \(\displaystyle {0.6}\),
+  \(\displaystyle {0.8}\),
+  \(\displaystyle {1.0}\),
+  \(\displaystyle {1.2}\),
+  \(\displaystyle {1.4}\),
+  \(\displaystyle {1.6}\)
+}
+]
+\addplot [thick, green, mark=diamond*, mark size=3, mark options={solid}]
+table {%
+0.01 nan
+0.05 0.0404705954957216
+0.1 0.249725252751273
+0.5 0.827644084563589
+1 1.3819898589047
+2 1.44475293159485
+5 1.44475293159485
+};
+\addlegendentry{Optimized}
+\addplot [semithick, blue, opacity=0.7, dashed, mark=x, mark size=4, mark options={solid}]
+table {%
+0.01 0.795137407788388
+0.05 0.893880706538164
+0.1 1.00023825952412
+0.5 1.3085246334169
+1 1.42208170890808
+2 1.4796769618988
+5 1.4796769618988
+};
+\addlegendentry{Vanilla (DP)}
+\draw (axis cs:0.05,0.0404705954957216) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.05};
+\draw (axis cs:0.1,0.249725252751273) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.1};
+\draw (axis cs:0.5,0.827644084563589) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{0.5};
+\draw (axis cs:1,1.3819898589047) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{1};
+\draw (axis cs:2,1.44475293159485) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{2};
+\draw (axis cs:5,1.44475293159485) ++(0pt,6pt) node[
+  scale=0.4,
+  anchor=base,
+  text=black,
+  rotate=0.0
+]{5};
+\end{groupplot}
+
+\end{tikzpicture}

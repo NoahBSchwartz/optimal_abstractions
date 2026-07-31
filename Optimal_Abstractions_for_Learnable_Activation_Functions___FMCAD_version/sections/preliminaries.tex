@@ -1,0 +1,122 @@
+\section{Preliminaries}\label{sec:range-analysis-problem}
+
+In this section, we will formally define the neural network model and provide some key assumptions on the activation functions so that they can be approximated by a PWA function with finitely many pieces. 
+
+\noindent\textit{Notation:} We will represent vectors $\vec{x}, \vec{y}, \vec{z}$ using boldface notation. For a vector $\vec{z}$ its $j^{th}$ component will be written $z_j$. For vectors $\vx, \vy \in \reals^n$, we define $\vz = \vx \odot \vy$ (the Hadamard product) of two vectors as the $n$ dimensional vector such that $z_i = x_i y_i$.
+
+\begin{definition}\label{def:general-nn}
+A general feedforward neural network with $K \geq 0$ hidden layers with $n$ inputs and $m$ outputs is defined by 
+\begin{compactenum}
+\item Weight matrices $W_1, \ldots, W_{K}, W_{K+1}$,  wherein each $W_i$ has dimensions $n_i \times n_{i-1}$ with $n_0 = n$ and $n_{K+1} = m$, and
+\item Layerwise activation functions $\sigma_1, \ldots, \sigma_K$ wherein $\sigma_{i}: \reals^{n_{i}} \rightarrow \reals^{n_i}$ defines the nonlinear transformation at each hidden layer, and is itself a vector of $n_i$ individual unit-level activation functions $\psi_{i,j}: \reals \rightarrow \reals$.
+\[ \sigma(\vec{z}) = \left(\begin{array}{c} 
+\psi_{i,1}(z_1) \\ 
+\vdots \\ 
+\psi_{i, n_i}(z_{n_i}) \\ 
+\end{array}\right)\]
+\end{compactenum}
+The function computed by the network is given by 
+\[ f_N(\vec{x}) = W_{K+1} \times \sigma_K( W_K \times \cdots \times \sigma_2( W_2 \times \sigma_1( W_1 \times \vec{x}))) \,.\]
+\end{definition}
+
+
+\begin{comment}
+\begin{figure}[ht!]
+	\centering
+	\resizebox{0.95\linewidth}{!}{\input{images/kan-diagram-tikz}}
+	\caption{A two-layer KAN with three inputs $\vx = (x_1, x_2, x_3)$ and three outputs $\vy = (y_1, y_2, y_3)$, i.e., $K=2$ with $n_1 = 3$, $n_2 = 2$, $n_3 = 3$. Each layer is shaded differently.}
+	\label{fig:kan-diagram}
+\end{figure}
+
+
+Multi-Layer Perceptrons (MLPs) are typically used with fixed activation functions that are non-linear and applied element-wise across the nodes of a layer which can be easily approximated with piecewise affine functions. For example, in a standard MLP with $K$ layers, the output of the $i^{th}$ layer is given by $\Phi_i(\vz_i) = \sigma(W_i \vz_i + b_i)$, where $\sigma$ is the activation function (typically $tanh$, $\text{sigmoid}$, or $\text{ReLU}$), $W_i$ is the weight matrix and $b_i$ is the bias vector for layer $i$.
+
+Kolmogorov-Arnold Networks (KAN)~\cite{Liu+Others/2025/KAN} on the other hand, are a more general class of networks that allow for learnable activation functions. KANs are inspired by the well-known Kolmogorov-Arnold representation theorem in real-analysis that states that any continuous function $f: \reals^n \rightarrow \reals$ can be expressed as a composition of univariate functions and addition~\cite{Kolmogorov/1957/Representation, Arnold/1958/Representation}. Therefore, KANs represent multivariate continuous functions in terms of additions of univariate representations~\cite{Sprecher/1996/Numerical,Liu+Others/2025/KAN}. There have been numerous approaches to defining KANs. Our formalism is based on the recent work of~\cite{Liu+Others/2025/KAN} that uses multiple layers involving polynomial splines. For simplicity of presentation, we will consider KANs with just one output. However, our overall approach extends easily to KANs with multiple outputs.
+%The model shows promise over traditional MLPs because of its ability to achieve similar performance with smaller network sizes. The Kolmogorov Arnold Representation Theorem shows that any continuous multivariate function can be decomposed into separate univariate functions. This allows for learnable activation functions at the edges of the KAN, as opposed to fixed activations on the nodes of an MLP. Crucially, these activation functions, parameterized by piecewise polynomial splines (B-Splines), concentrate the network's complexity more than simpler, fixed activations.
+
+\begin{definition}[Kolmogorov-Arnold Networks (KAN)]\label{def:kan-def}
+    A KAN $N$ (Fig.~\ref{fig:kan-diagram}) over inputs $\vx: (x_1, \ldots, x_n)$ with $K > 0$ layers is a function of the form: $ f_N(\vx) = \Phi_K( \Phi_{K-1} ( \ldots \Phi_1(\vx) \ldots ))$, wherein each $\Phi_i$ is a function $\reals^{n_i} \rightarrow \reals^{n_{i+1}}$ that represents the $i^{th}$ layer, and is written as follows: $\Phi_i( \vz_i) = ( \phi^{(i)}_{1}(\vz_i), \ldots , \phi^{(i)}_{n_{i+1}}(\vz_i) ) \,, \text{wherein}\ \vz_i \in \reals^{n_i}\ \text{represents the inputs for layer}\ i\,$.
+    Finally, each $\phi^{(i)}_j: \reals^{n_i} \rightarrow \reals$ has a Kolmogorov-Arnold representation of the form: $ \phi^{(i)}_{j}(\vz_i) = \psi^{(i)}_{j,0}\left( \sum_{k=1}^{n_i} \psi^{(i)}_{j,k}(\vz_{i,k}) \right)$.
+    The univariate functions $\psi^{(i)}_{j,k}$ are assumed to satisfy Assumption~\ref{assum:psi}.
+ \end{definition}
+\end{comment}
+
+\begin{assumption}[Neural Network Input Assumption]\label{assum:nn}
+We assume that the inputs to the neural network fall inside a set $\vx \in X$ wherein $X = [-M_1, M_1] \times \cdots \times [-M_n, M_n]$ for fixed (but possibly large) bounds  $M_1, \ldots, M_n \geq 0$.
+\end{assumption}
+
+
+\begin{assumption}[Assumptions on $\psi$]\label{assum:psi}
+    We will assume that each unit level activation function 
+    $\psi: \reals \rightarrow \reals$ satisfies the following:
+    \begin{compactenum}
+	\item $\psi(z)$ is continuous and differentiable.
+	\item  There is a procedure $\textsc{DerivativeInterval}(\psi, a, b)$ that given input interval $z \in [a, b]$, outputs an interval $[\ell, u]$ such that 
+    $[\ell, u] \supseteq \left\{ \frac{d\psi}{dz}\ |\ z \in [a, b]\right\}$. Also, there exists an error tolerance $\epsilon > 0$ such that:
+	\begin{inparaenum}
+		\item  $\ell \leq \min_{z \in [a, b]} \frac{d\psi}{dz} \leq \ell + \epsilon$,
+		\item $u - \epsilon \leq \max_{z \in [a,b]} \frac{d\psi}{dz} \leq u$.
+	\end{inparaenum}
+    The \textsc{DerivativeInterval} procedure will help us sample derivatives of $\psi$ at discrete points and reason about how the function behaves between these discrete points. 
+    %\item \textbf{Asymptotically Linearity}: $\psi(z)$ tends asymptotically  to linear functions.  Formally, for all $\epsilon > 0$ there exists a limit $M$ and linear functions $L_1(z) = a_1 z + b_1$, $L_2(z) = a_2 z + b_2$, such that  
+    %\[ (\forall z)\ \left( \begin{array}{l}
+    %z \geq M \ \Rightarrow\ |\psi(z) - L_1(z)| \leq \epsilon \\ 
+    %z \leq -M \ \Rightarrow\ |\psi(z) - L_2(z)| \leq \epsilon \\ 
+    %\end{array}\right) \]
+    \end{compactenum}
+\end{assumption}
+
+\begin{lemma}\label{lemma:unit-input-bound}
+As a consequence of Assumptions~\ref{assum:nn} and ~\ref{assum:psi}, for each unit $\psi_{i,j}$ there exists a constant $L_{i,j} \geq 0$ such that if the input to the network is $\vx \in X$, then the input to the unit lies in the interval  $z \in [-L_{i,j}, L_{i,j}]$.
+\end{lemma}
+\begin{proof}
+Proof is a simple consequence of the continuity of each activation function which guarantees that the image of a compact (closed and bounded) set remains compact. 
+\end{proof}
+
+In practice, the domain $[-L_{i,j}, L_{i,j}]$ for each unit in the network can be over-approximated by a standard interval analysis carried out over the entire network~\cite{DBLP:journals/corr/abs-1810-12715}. 
+
+These assumptions are satisfied for commonly used activation functions including gelu, tanh, sigmoid as well as learnable activation functions including  B-Splines~\cite{Liu+Others/2025/KAN,torchkan}, Pad\'e approximations~\cite{afzal_2024}, Chebyshev polynomials \cite{ss_ar_r_kp_2024}, Gaussian processes~\cite{Chen/2024/Gaussian}, and Fourier Series~\cite{Xu+Others/2024/FourierKAN}.
+
+\begin{definition}[Continuous PWA Function]\label{def:cpwa-function}
+A $k$-piece univariate, continuous PWA function (for $k \geq 2$) is represented by a sequence of $k-1$ breakpoints: $\tupleof{(z_1,y_1) \ldots, (z_{k-1}, y_{k-1})}$ and end slopes $m_0, m_{k-1}$. The breakpoints satisfy the ordering constraint wherein $ z_1 <  \cdots < z_{k-1} $ such that, the PWA function $\psihat$ is defined as:
+\[ \psihat(z) = \begin{cases}
+	y_i + (z - z_i)\frac{y_{i+1} - y_i}{z_{i+1} - z_i} &  \text{if}\ z \in [z_i, z_{i+1}] \\ 
+    y_1 + m_0 (z - z_1) & z \leq z_1 \\ 
+    y_{k-1} + m_{k-1} (z - z_{k-1}) & z \geq z_{k-1} \\ 
+    \end{cases}
+\]
+where, $i \in \{ 1, \ldots, k-2\}$. Let $m_i := \frac{y_{i+1} - y_i}{z_{i+1} - z_i}$ for $i  \in \{ 1, \ldots, k-2\}$.
+\end{definition}
+
+\begin{comment}
+We will briefly comment on the need for asymptotic linearity. Since the goal of this paper is to approximate each unit individually by a PWA function with finitely many pieces, we note that asymptotic linearity is a requirement. Functions that fail this property such as $\sin(z)$ cannot, in fact, be arbitrarily approximated by a PWA function with finitely many pieces.
+
+\begin{definition}[Finitely PWA-Approximable Function]
+A continuous and differentiable function  function $\psi(z)$ is said to be (finite) PWA approximable iff for any $\epsilon > 0 $ there exists a continuous PWA function $\hat{\psi}(z)$ such that for all $z \in \reals, | \psi(z)  - \hat{\psi}(z)| \leq \epsilon$.
+\end{definition}
+
+The following theorem justifies the assumption of asymptotic linearity of activation functions. 
+
+\begin{theorem}
+A function $\psi(z)$ is finitely PWA approximable iff it is asymptotically linear.
+\end{theorem}
+
+\end{comment}
+
+
+\paragraph{Range Analysis Problem }
+The range analysis problem seeks a guaranteed range for the outputs of a network given a set of inputs. Let $f_N: \reals^{n} \rightarrow \reals$ be a NN with $K$ layers as defined in Def.~\ref{def:general-nn}. Suppose we define a range $\vx \in [\vl, \vu] \subseteq X$, wherein $\vl, \vu \in \reals^n$ are vectors and $\vx \in [\vl, \vu]$ denotes the box constraint $\ell_i \leq x_i \leq u_i$ for each component $i \in \{1, \ldots, n\}$. Our goal is to find a ``tight'' range that over-approximates all the possible output values. In other words, we wish to find $\alpha, \beta \in \reals$ with $\alpha \leq \beta$ such that
+\begin{equation} \label{Eq:range-analysis-guarantee}
+	\forall\ \vx \in [\vl, \vu], f_N(\vx) \in [\alpha, \beta]
+\end{equation}
+
+Although $\alpha = -\infty$ and $\beta = \infty$ is a trivial solution, we often seek to find the tightest possible bounds that establish that $[\alpha, \beta] \subseteq [a, b]$ for some user-provided correctness property
+\[ \vx \in [\vl, \vu] \Rightarrow f_N(\vx) \in [a, b]\,.\]
+
+\begin{problem}[Range Verification Problem]\label{def:problem-stmt}
+Given a KAN $N$ computing a function $f_N: \reals^n \rightarrow \reals$, an input range $\vx \in [\vl, \vu]$, we wish to find  the ``tightest-possible'' range over the output $[\alpha, \beta]$ satisfying Eqs.~\eqref{Eq:range-analysis-guarantee}.
+\end{problem}
+
+We can extend Problem~\ref{def:problem-stmt} to  cases wherein the inputs $\vx$ range over a polyhedron $P[\vx]$ since our approach in this paper is based on a MILP formulation and the polyhedral constraint over the inputs can be directly encoded.
+
+% Figure~\ref{fig:kan-diagram} shows a diagram representing a KAN in terms of the univariate functions $\psi_{j,k}^{(i)}(z)$. For this example, $K=2$ and $n_1 = 3, n_2 = 2, n_3 = 3$.

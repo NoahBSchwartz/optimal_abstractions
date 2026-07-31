@@ -1,0 +1,44 @@
+\section{Optimized Piecewise Affine (PWA) Approximations for Univariate Functions}\label{sec:optimal-pwa-univariate-fun}
+
+Let us consider a univariate function $\psi(z) = \psi_{i,j}(z)$, which appears as part of the neural network from Def.~\ref{def:general-nn},  satisfying Assumption~\ref{assum:psi}. We will provide an approach to approximate it using a PWA function with a fixed bound on the number of pieces within the interval $z \in [-L, L]$ wherein $L=L_{i,j}$ corresponds to the input domain of this particular unit when the network input domain is the set $X$ (see Assumption~\ref{assum:nn} and Lemma~\ref{lemma:unit-input-bound}).
+
+\paragraph{Domain Discretization} Since the function $\psi$ is not known to us, we will discretize the continuous range $z \in [-L,L]$ into $j_{\max} +1$ intervals using grid points that are $\Delta = \frac{2L}{j_{\max}}$ distance apart, so that each grid point is of the form  $z_j = -L + j \Delta$ for a natural number $j \in \nat$. Here, $j_{\max}$ is a user-specified input, fixed once $L$ and the discretization factor $\Delta$ are chosen (equivalently, $j_{\max} = \nicefrac{2L}{\Delta}$): a larger $j_{\max}$ (smaller $\Delta$) yields a finer grid and hence a smaller discretization error, at the cost of a longer running time for the dynamic program. We evaluate the function at each of these grid points and approximate the function over this finite set of discrete grid points. Later, we will show how to account for the error introduced by the interval between the grid points that is not accounted for in this process. 
+The discretized optimal PWA problem is stated as follows:
+
+\begin{problem}[Optimal Univariate PWA Approximation]\label{prob:univariate-pwa}
+The problem of optimally approximating  $\psi(z)$ is as follows:
+\begin{compactdesc}
+\item[Inputs:] An algorithm for $\psi$, limits $-L, L$, discretization factor $\Delta$ and limit on number of pieces $k$.
+\item[Output:] Breakpoints $z_1 \leq z_2 \leq \cdots \leq z_{k-1}$, which together with the values $y_i = \psi(z_i)$ define (via Def.~\ref{def:cpwa-function}) a $k$-piece PWA function $\psihat$, such that the discretized error $e(\Delta) = \max_{u \in \{ -L, -L + \Delta, -L + 2 \Delta, \cdots, L\}} \left| \psi(u) - \psihat(u) \right| $ is minimized.
+\end{compactdesc}
+Note that if two breakpoints $z_j, z_{j+1}$ coincide in the output, we treat them as the single breakpoint.
+\end{problem}
+
+Let $\nn(j; \Delta) = -L + j \Delta$. We write $\nn(j) := \nn(j; \Delta)$ whenever $\Delta$ is clear from context, so $\nn(j)$ and $\nn(j; \Delta)$ denote the same grid point.
+The optimal univariate PWA approximation can be solved using a dynamic programming algorithm first proposed by Bellman et al.~\cite{Bellman/1961/Approximation,Bellman+Roth/1969/Curve}. The algorithm defines a value function $V(p, j, q)$. Intuitively, $V(p, j, q)$ is the optimal (minimum) worst-case error for approximating $\psi$ over the range $[\nn(p), \nn(j_{\max})]$ using at most $q$ pieces. The first of these pieces is anchored at the left endpoint $\nn(p)$, and the index $j$ ranges over the candidate right endpoints for this first piece that the recursion considers, with $p < j \leq j_{\max}$ and $q \leq k$, with all points in $[\nn(p), \nn(j)]$ treated as belonging to this same first piece. The function $V$ is recursively defined as
+\begin{equation}\label{eq:value-function}
+	V(p, j, q) = \begin{cases}
+	\mathsf{sPE}(\psi, p, j_{\max}), &\text{if } j \geq j_{\max}\\
+		\infty, & \text{if }  q \leq 0                                    \\
+        \min(\max(\mathsf{sPE}(\psi, p, j),\\\hspace{4.2em}V(j, j+1, q-1)),\\\hspace{2em}V(p, j+1, q)),&\text{otherwise}
+		 %\min\left( \begin{array}{l}
+	  %	 	\max\left( \mathsf{sPE}(\psi, p, j), V(j, j+1, q-1) \right), \\
+	%	 	V(p, j+1, q)
+	%	\end{array} \right), &\text{otherwise}
+	\end{cases}
+\end{equation}
+
+The function $\mathsf{sPE} = \mathsf{singlePieceError}(\psi, j_1, j_2)$ measures the error between $\psi(z)$ and the line joining the points $(\nn(j_1), \psi(\nn(j_1)))$ and $((\nn(j_2), \psi(\nn(j_2)))$, over the discretized interval $[\nn(j_1), \nn(j_2)]$. Let $s_{j_1, j_2}$ be the slope of the line which equals $\frac{ \psi(\nn(j_2)) - \psi(\nn(j_1))}{\nn(j_2) - \nn(j_1)}$.
+\begin{multline*}
+    \mathsf{sPE} =  \max_{z \in \{ \nn(j_1),  \ldots, \nn(j_2)\}} \ \left| \psi(z) - \psihat(z)\right| \,,\\ 
+     \text{wherein} \ \psihat(z) = \left( \psi(\nn(j_1)) + (z - \nn(j_1)) s_{j_1, j_2} \right) \,.
+\end{multline*}
+The dynamic programming formulation upon memoization runs in time $O(j_{\max}^3 k)$ assuming that evaluations of $\psi(z)$ and other arithmetic operations are $O(1)$. The optimal error equals the value $V(0, 1, k)$ and the solution can be recovered in $O(j_{\max}^2 k)$ steps by traversing the table.
+Let $\psihat$ be the function obtained as a result of running Bellman's algorithm. 
+
+\paragraph{Discretization vs. Continuous Error}  We consider the gap between the discretized error $e(\Delta) = \max_{z \in \{ -L, -L + \Delta, -L + 2 \Delta, \cdots, L\}} \left| \psi(z) - \psihat(z) \right| $ and error over the entire continuum of values: $e(\psihat, \psi) = \max_{z \in [-L, L]} | \psi(z) - \psihat(z) |$. We will derive a correction term that can be used to account for this gap. This correction can be used to modify the $\mathsf{singlePieceError}$ calculation used in Eq.~\eqref{eq:value-function}.
+
+The derivation of this error is detailed  in Appendix~\ref{app:discretization-correction-proof} and uses the \textsc{DerivativeInterval} procedure that is assumed to exist through Assumption~\ref{assum:psi}. Finally, the existence of this bound  provides us a way to control  $\Delta$ to a ``small enough'' value so that the discretization error can be made to fall below a user-provided limit. 
+
+
+\paragraph{Trade-Off Table} Finally, we use the dynamic programming formulation to yield a tradeoff table that has the following useful information for a given function $\psi(z)$. Let $k_{\max}$ be an upper limit on the number of breakpoints. The tradeoff table stores, for each value $k \in [1, k_{\max}]$, the minimum error $\err(\psi, k)$ obtained by running Bellman's algorithm seeking a function $\psihat_k$ with at most  $k$ pieces and information on the optimal breakpoints. Note that we do not really need to run the dynamic programming $k_{\max}$ times, once for each budget $k \in [1, k_{\max}]$. The recursion in Eq.~\eqref{eq:value-function} only ever decreases the piece-budget argument $q$, by exactly one each time a piece is closed off. Consequently, computing $V(0, 1, k_{\max})$ by memoization necessarily computes and caches $V(0, 1, q)$ for every intermediate budget $q \leq k_{\max}$ along the way. So a single run of Bellman's algorithm with $k = k_{\max}$ already populates the full memo-table, and we can simply read off the value $V(0, 1, k)$ for every $k \in [1, k_{\max}]$ from it, without any additional runs.

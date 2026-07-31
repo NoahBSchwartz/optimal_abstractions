@@ -1,0 +1,131 @@
+\section{Optimized PWA for Entire Network }\label{sec:optimal-pwa-for-entire-kan}
+
+%Consider a KAN from Def.~\ref{def:kan-def} whose individual functions $\psi^{(i)}_{j,k}$ have been subjected to the optimal PWA
+%algorithm described in Section~\ref{sec:optimal-pwa-univariate-fun}. 
+We will now consider how to approximate the entire network into a PWA function, while ensuring that the overall error $\max_{\vx} | f_N(\vx) - \fhat_N(\vx) | \leq \delta$ for a fixed $\delta$. 
+\begin{comment} 
+We will proceed as follows:
+\begin{inparaenum}[(A)]
+    \item We will derive an upper bound on the error for the entire KAN as a function of the errors at each individual univariate functions. In particular, if $\err_{j,k}^{(i)}$ is the error for converting the function $\psi^{(i)}_{j,k}$ into a PWA function $\psihat^{(i)}_{j,k}$, then we derive constants $W_{j,k}^{(i)}$ such that $| f_N - \fhat_N | \leq \sum_{i=1}^K \sum_{j=1}^{n_{i+1}} \sum_{k=1}^{n_{i}} W_{j,k}^{(i)} \err_{j,k}^{(i)}$.
+    \item  Finding  the ``optimal'' abstraction for a KAN given a desired worst-case error bound $\delta$ is formulated as a variant of the knapsack problem.
+\end{inparaenum}
+\end{comment}
+%\subsection{Error Analysis for KAN}
+Let us suppose we replace each unit in the KAN $\psi_{i,j}$ by a PWA function $\psihat_{i,j}$ incurring an error $\err_{i,j} = \max_{z \in [-L, L]} | \psi(z) - \psihat(z)|$. We will derive a bound for the entire NN for the value $\max_{\vx \in X} | f_N(\vx) - \fhat_N(\vx)|$.
+First, we prove an error propagation bound for each unit $\psi_{i,j}$ under inputs $z, \hat{z}$.
+\begin{lemma}\label{Lemma:lipschitz-unit}
+    For each unit $\psi_{i,j}$, there exists a constant $ \lip_{i,j} \geq 0$ such that for all $z, \hat{z} \in [-L_{i,j}, L_{i,j}]$,
+    \begin{equation*}
+        |\psi_{i,j}(z) - \psihat_{i,j}(\hat{z}) |  \leq \err_{i,j} + \lip_{i,j} | z - \hat{z}|
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+        Let $\psi=\psi_{i,j}$, $\psihat = \psihat_{i,j}$, $\psi'_{\max} = \max_{z \in [-L_{i,j}, L_{i,j}]} \left|\frac{d\psi}{dz}\right|$ and $\err= \err_{i,j}$. We may write
+	\begin{equation*}
+	    | \psi(z) - \psihat(\hat{z}) | \leq  |  \psi(z)  - \psi(\hat{z}) |  + |  \psi(\hat{z}) -  \psihat(\hat{z}) | \leq  \psi'_{\max} | z - \hat{z} | + \err
+	\end{equation*}
+	We obtain the result by setting   $\lip_{i,j} =\psi'_{\max}$. Note that the \textsc{DerivativeInterval} (Assumption~\ref{assum:psi}) function can be used to compute a tight upper bound on $\psi'_{\max}$.
+\end{proof}
+%We have assumed KANs to have a single output and thus, $y, \yhat$ are scalars.
+Consider a NN as in Def.~\ref{def:general-nn} with $K$ layers, input $\vx \in X $ and output $y$.  Let $W_1, \ldots, W_{K}$ be the matrices for the hidden layers and $W_{K+1}$ be the output layer matrix. Also, let $\psi_{i,j}$, the $j^{th}$ activation function at the $i^{th}$ layer be approximated by $\psihat_{i,j}$ with the local approximation error satisfying Lemma~\ref{Lemma:lipschitz-unit}. 
+Consider the PWA approximated network obtained by replacing each $\psi_{i,j}$ by $\psihat_{i,j}$.
+Let $ \vz_1, \ldots, \vz_{K+1}$ be the layer inputs, with $\vz_1 = \vx$ and $\vz_{i+1} = \sigma_i( W_i \vz_i)$ for $i = 1, \ldots, K$. Similarly, for the PWA approximated network, let $\hatz_i$ represent the corresponding input to the $i^{th}$ hidden layer in the PWA approximated network. Let $\lip_i$ be the vector whose entries correspond to $\lip_{i,j}$ for the activation function $\psi_{i,j}$ from Lemma~\ref{Lemma:lipschitz-unit} and $\ve_{i}$ be the vector whose entries correspond to the approximation error $e_{i,j}$ for the activation function $\psi_{i,j}$.  Let $|W_i|$ represents the matrix whose entries are the absolute values of the corresponding entries in $W_i$ and $|\vz_i - \hatz_i| $ be the vector whose entries consist of the  absolute value of entries in $\vz_i - \hatz_i$.
+
+\begin{lemma}\label{Lemma:layer-approximation}
+For $1 \leq i \leq K$, we have $|\vz_{i+1} - \hatz_{i+1} | \leq \lip_i \odot (|W_i| | \vz_i - \hatz_i|) + \ve_i$.
+\end{lemma}
+\begin{proof}
+First, we observe that $|W_i \vz_i - W_i \hatz_i | \leq |W_i| | \vz_i - \hatz_i| $. Next, applying Lemma~\ref{Lemma:lipschitz-unit}, we obtain 
+\[
+|\vz_{i+1} - \hatz_{i+1} | \leq \lip_i \odot (|W_i| | \vz_i - \hatz_i|) + \ve_i\,.
+\]
+ Recall that for two vectors $\va, \vb$ of the same dimension,  we define $\va \odot \vb$ as the vector whose entries are products of the corresponding entries $a_i b_i$.
+\end{proof}
+
+We will now state the main result that casts the overall error of each output of the NN in terms of the approximation error $\err_{i,j}$ at each unit.   $ \vy = f_N(\vx)$ and  $\vec{\hat{y}} = \fhat_N(\vx)$ for some $\vx \in X$. Let $y_l$ and $\hat{y}_l$ the the $l^{th}$ component of the output for $1 \leq l \leq m$.
+
+\begin{restatable}{theorem}{kanoverallerr}
+\label{thm:kan-overall-error}
+       For each  unit $\psi_{i,j}$ and for each output index $1 \leq l \leq m$ there exists a constant $\decor{S}{l}{i,j} \geq 0$ such that the overall approximation error is
+       $ | y_l - \yhat_l | \leq  \sum_{i=1}^K \sum_{j=1}^{n_{i}}  \decor{S}{l}{i,j} \times \err_{i,j}$.
+       Here $\decor{S}{l}{i,j}$ denotes sensitivity weight constants (distinct from the layer weight matrices $W_1,\ldots,W_{K+1}$ of Def.~\ref{def:general-nn} and the knapsack budget $W$ of Problem~\ref{MOK-Problem}).
+\end{restatable}
+\begin{proof}
+Note that $\vz_1 = \hatz_1 = \vx$ (both networks receive the same input). Therefore, $|\vz_1 - \hatz_1| = 0$. From Lemma~\ref{Lemma:layer-approximation}, we note that $|\vz_{i+1} - \hatz_{i+1}| \leq \lip_i \odot (|W_i| | \vz_i - \hatz_i|) + \ve_i$. Expanding on this, we note that for each entry $|z_{i+1, r} - \hat{z}_{i+1,r}|$ the bound takes the form
+\[ |z_{i+1, r} - \hat{z}_{i+1,r}| \leq \sum_{k=1}^i \sum_{j=1}^{n_k} \decor{S}{r}{k,j} e_{k,j} \,,\]
+for some positive constants $\decor{S}{r}{k,j}$ that bound the contribution of the error incurred in the PWA approximation of $\psi_{k,j}$ on the $r^{th}$ input to the $(i+1)^{th}$ hidden layer.
+
+Finally, the output $y_l$ is obtained as the $l^{th}$ component of the vector $\vy = W_{K+1} \vz_{K+1}$. Therefore, we obtain the required bound as a weighted linear combination of approximation error for each activation function.
+\end{proof}
+
+This bound is a worst-case surrogate and is not guaranteed to be tight. Most of the slack we see comes from Lemma~\ref{Lemma:lipschitz-unit} which uses the Lipschitz constant $\Lambda_{i,j} = \max_{z \in [-L_{i,j}, L_{i,j}]} |\psi'_{i,j}(z)|$ over each units entire input range rather than the local slope at the inputs actually encountered, and Lemma~\ref{Lemma:layer-approximation} bounds $|W_i \vz_i - W_i \hatz_i|$ by $|W_i|\,|\vz_i - \hatz_i|$, which throws away any cancellation between positive and negative entries, essentially the same sign-agnostic propagation used in interval arithmetic (Section~\ref{sec:related}). The bound is still useful for the knapsack of Section~\ref{sec:optimalkan-abs}, which only needs the \emph{relative} sensitivity $\decor{S}{l}{i,j}$ across units to be roughly right rather than the absolute error estimate to be tight. Section~\ref{sec:results} suggests that this is sufficient in practice.
+
+\subsection{Optimized NN Abstraction as Knapsack}\label{sec:optimalkan-abs}
+
+Theorem~\ref{thm:kan-overall-error} shows how to calculate the error once we have decided upon a PWA abstraction of each unit $\psi_{i,j}$ yielding the error term $\err_{i,j}$. The constants $\decor{S}{l}{i,j}$ corresponding to each unit and output can be computed using a layer-by-layer error propagation analysis that was presented in the proof of the theorem.  For the remainder of this section, we will assume that the network has a single output, and we write $S_{i,j}$ for the corresponding sensitivity weight $\decor{S}{1}{i,j}$. Alternatively, we may specify a weight vector that combines error bound for each component of the output into an overall weighted error bound to be minimized.
+
+The key problem is therefore to decide how many pieces $p_{i,j}$ to allocate to each unit $\psi_{i,j}$, given a fixed global budget $B$ on the total number of pieces used across the entire network, i.e., $\sum_{i,j} p_{i,j} \leq B$, so as to minimize the resulting overall approximation error $\sum_{i,j} S_{i,j} \times \err_{i,j}(p_{i,j})$. We fix a budget on the total number of pieces, rather than on the error, because it is this number that determines the complexity of the downstream verification problem, especially the MILP formulation that we will provide in Section~\ref{sec:milp-formulation}: for a fixed complexity budget $B$, we then obtain the allocation of pieces to units that makes the best use of it, i.e., that minimizes the resulting approximation error.
+We formulate the problem of optimized abstraction as a variant of the well-known knapsack problem called the multi-choice knapsack problem~\cite{Kellerer+Others/2004/MultipleChoice}.
+
+\begin{problem}[Multi-Choice Knapsack Problem]\label{MOK-Problem}
+An instance of the multi-choice knapsack problem is defined as follows:
+\begin{compactdesc}
+\item[Inputs:] We have $N \geq 1$ \emph{options}, wherein each option is a set of  $k \geq 1$ items that are available to be chosen and the items belonging to two different options are disjoint. Furthermore, for each option $i$, we have a table of non-negative weights (listed in ascending order) and values for the items in option $i$:
+    \[\begin{array}{|r|rrrr|}
+            \hline
+            \text{Item}    & \decor{I}{i}{1}   & \decor{I}{i}{2}   & \cdots & \decor{I}{i}{k}   \\
+            \hline
+            \text{Weights} & \decor{w}{i}{1} < & \decor{w}{i}{2} < & \cdots & < \decor{w}{i}{k} \\
+            \text{Value}   & \decor{v}{i}{1}   & \decor{v}{i}{2}   & \cdots & \decor{v}{i}{k}   \\
+            \hline
+        \end{array}    \]
+    We are given a total weight budget $W \geq 0$. We will assume \emph{feasibility}: i.e, $\sum_{i=1}^N \decor{w}{i}{1} \leq W$.
+\item[Output:] Choose a set of $N$ items, choosing precisely one item from each option such that (a) the total weight of chosen items remains within the budget $W$ and (b) the total value of the chosen items is maximized.
+\end{compactdesc}
+\end{problem}
+
+\begin{restatable}{theorem}{moknapsacknpcomplete}\label{theorem:moknapsack-npcomplete}
+    The (decision version) of the multi-choice knapsack problem is \textbf{NP}-complete.
+\end{restatable}
+Proof is provided in Appendix~\ref{appendix:proof-theorem3}.
+Choosing an optimized abstraction for a NN reduces to a multi-choice knapsack problem:
+\begin{inparaenum}[(a)]
+        \item Each option corresponds to a single unit $\psi_{i,j}$ and thus, there are as many options as the number of units in the KAN;
+        \item For each option corresponding to the unit $\psi_{i,j}$, each item corresponds to a choice of the number of pieces $p \in [1, k_{\max}]$ for the piecewise linearization $\psihat_{i,j}$, with weight $\decor{w}{i,j}{p} = p$, the number of pieces itself, and value $\decor{v}{i,j}{p} = -S_{i,j} \times \err_{i,j}(p)$, wherein $\err_{i,j}(p)$ is the minimum error achievable using $p$ pieces for unit $\psi_{i,j}$, obtained from the trade-off table discussed in Section~\ref{sec:optimal-pwa-univariate-fun}. Using more pieces for a unit lowers its error $\err_{i,j}(p)$ and hence raises its value $\decor{v}{i,j}{p}$, at the cost of a larger weight.
+        \item The weight budget $W$ of Problem~\ref{MOK-Problem} is the same as the total piece budget $B$.
+\end{inparaenum}
+Maximizing the total value $\sum_{i,j} \decor{v}{i,j}{p_{i,j}}$ subject to the weight budget $B$ is therefore the same problem as minimizing the total weighted error $\sum_{i,j} S_{i,j} \times \err_{i,j}(p_{i,j})$ subject to the piece budget $B$, as desired.
+
+Let us assume a multi-choice knapsack problem instance with $N$ options, each having $k$ items. The dynamic programming formulation is based on a value function
+that we will denote $\MO(i, \hat{W})$ that asks for the optimal (maximum) total value obtainable by selecting items from options $i$ until $N$ (inclusive) with a remaining weight budget $\hat{W}$.
+\begin{equation*}
+    \MO(i, \hat{W}) = \begin{cases}
+		-\infty\;\; \text{if}\ \hat{W} < 0                                                                                   \\
+		0 \;\; \text{if}\  i > N \ \land\ \hat{W} \geq 0                                                                    \\
+		\max_{j=1}^k \left( \decor{v}{i}{j} + \MO\left(i+1, \hat{W} - \decor{w}{i}{j} \right) \right) \;\; \\
+	\end{cases}
+\end{equation*}
+The optimal answer is obtained by computing $\MO(1, W)$ through memoization.
+\begin{theorem}
+	The  dynamic programming algorithm for multi-choice knapsack runs in time $O(W N k)$.
+\end{theorem}
+In the setting of optimized NN abstractions, the weights $\decor{w}{i,j}{p} = p$ are natural numbers by construction, and the weight budget $W$ is instantiated as the total piece budget $B$. Unlike an error-valued budget, this requires no additional quantization assumption. The running time complexity is linear in the network size, since $N$ is the number of units in the network.
+
+%\subsection{Approximate Solutions to Multi-Choice Knapsack}
+
+\begin{comment}
+To do so, we will focus on a single layer
+$\Phi_i: \reals^{n_i} \rightarrow \reals^{n_{i+1}}$ (recall
+Def.~\ref{def:kan-def}).  Let $\vz_i$ denote the input to the layer
+and $\vz_{i+1}$, the output. Let us assume that $\err_i$ is a bound on
+the $L_{\infty}$ norm discrepancy at the input of the $i^{th}$ layer.
+Let us denote $\Phihat_i$ as the PWA approximation of layer $i$
+obtained by replacing $\decor\psi{i}{j,k}$ by a PWA function
+$\decor{\psihat}{i}{j,k}$.
+
+We seek an upper bound for all $\vz_i$, $\| \Phi_i(\vz_i) - \Phihat_i(\vzhat_i) \|_{\infty}$,
+wherein $\| \vzhat_i - \vz_i \|_{\infty} \leq \err_i$. Once again, using the notation established
+in Def.~\ref{def:kan-def}, note that
+\[ \| \Phi_i(\vz_i) - \Phihat_i(\vzhat_i) \|_{\infty} = \max_{j=1}^{n_{i+1}} \left| \decor\phi{i}{j}(\vz_i) - \decor\phihat{i}{j}(\vzhat_i) \right| = \max_{j=1}^{n_{i+1}} \left|  \psi^{(i)}_{j,0}\left( \sum_{k=1}^{n_i} \psi^{(i)}_{j,k}(\vz_{i,k}) \right)  -
+	\psihat^{(i)}_{j,0}\left( \sum_{k=1}^{n_i} \psihat^{(i)}_{j,k}(\vzhat_{i,k}) \right)  \right| \,.\]
+\end{comment}

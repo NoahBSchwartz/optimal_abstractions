@@ -1,0 +1,118 @@
+\begin{tikzpicture}[
+    node distance = 0.5cm,
+    phi/.style={rectangle, draw, text centered },
+    summ/.style={circle, draw, fill=red!20, text centered},
+    input/.style={circle, draw, fill=black, minimum size=0.3pt, inner sep=0.3pt},
+    connection/.style={draw, -latex'}
+]
+
+\begin{scope}
+    % Input nodes
+    \node[input] (x1i) at (-4,3){}; %{$x_1$};
+    \node[input] (x2i) at (-4,1) {};% {$x_2$};
+    \node[input] (x3i) at (-4,-1) {};% {$x_3$};
+
+    \node[input, right of = x1i](x1o){};
+    \node[input, right of = x2i](x2o){};
+    \node[input, right of = x3i](x3o){};
+
+    \node[phi, name=phi111] at (-2.2, 3){\footnotesize $\psi^{(1)}_{1,1}$};
+    \node[phi, name=phi112] at (-2.2, 2.25){\footnotesize $\psi^{(1)}_{1,2}$};
+    \node[phi, name=phi113] at (-2.2, 1.5){\footnotesize $\psi^{(1)}_{1,3}$};
+
+
+    \node[phi, name=phi121] at (-2.2, 0.5){\footnotesize $\psi^{(1)}_{2,1}$};
+    \node[phi, name=phi122] at (-2.2, -0.25){\footnotesize $\psi^{(1)}_{2,2}$};
+    \node[phi, name=phi123] at (-2.2, -1.0){\footnotesize $\psi^{(1)}_{2,3}$};
+
+    \node[summ, right = 0.5cm of phi112](s1) {\scriptsize $\sum$};
+    \node[summ, right = 0.5cm of phi122](s2) {\scriptsize $\sum$};
+
+    \node[phi, name=phi11, right=0.5cm of s1] {\footnotesize $\psi^{(1)}_{1}$};
+    \node[phi, name=phi12, right=0.5cm of s2] {\footnotesize $\psi^{(1)}_{2}$};
+
+    \node[input, right=0.9cm of phi11](s1o){};
+    \node[input, right=0.9cm of phi12](s2o){};
+
+    \node[phi, name=phi211] at (2.7, 3){\footnotesize $\psi^{(2)}_{1,1}$};
+    \node[phi, name=phi212] at (2.7, 2.25){\footnotesize $\psi^{(2)}_{1,2}$};
+    \node[phi, name=phi221] at (2.7, 1.25){\footnotesize $\psi^{(2)}_{2,1}$}; 
+    \node[phi, name=phi222] at (2.7, 0.5){\footnotesize $\psi^{(2)}_{2,2}$};
+    \node[phi, name=phi231] at (2.7, -0.5){\footnotesize $\psi^{(2)}_{3,1}$};
+    \node[phi, name=phi232] at (2.7, -1.25){\footnotesize $\psi^{(2)}_{3,2}$};
+
+    \node[summ, name=s3] at (4,2.625) {\scriptsize $\sum$}; 
+    \node[summ, name=s4] at (4,0.875) {\scriptsize $\sum$}; 
+    \node[summ, name=s5] at (4,-0.875) {\scriptsize $\sum$}; 
+
+    \node[phi, name=phi21, right=0.5cm of s3]{\footnotesize $\psi^{(2)}_{1}$};
+    \node[phi, name=phi22, right=0.5cm of s4]{\footnotesize $\psi^{(2)}_{2}$};
+    \node[phi, name=phi23, right=0.5cm of s5]{\footnotesize $\psi^{(2)}_{3}$};
+
+    \node[input, right=1.3cm of phi21](s3o){};
+    \node[input, right=1.3cm of phi22](s4o){};
+    \node[input, right=1.3cm of phi23](s5o){};
+
+    \path[-] (x1i) edge[connection] node[above]{\footnotesize $x_1$} (x1o);
+    \path[-] (x2i) edge[connection] node[above]{\footnotesize $x_2$} (x2o);
+    \path[-] (x3i) edge[connection] node[above]{\footnotesize $x_3$} (x3o);
+
+    \path[->] (x1o) edge (phi111.west)
+    (x1o) edge (phi121.west)
+    (x2o) edge (phi112.west)
+    (x2o) edge (phi122.west)
+    (x3o) edge (phi113.west)
+    (x3o) edge (phi123.west)
+    (phi111.east) edge (s1)
+    (phi112.east) edge (s1)
+    (phi113.east) edge (s1)
+    (phi121.east) edge (s2)
+    (phi122.east) edge (s2)
+    (phi123.east) edge (s2)
+    (s1) edge (phi11)
+    (s2) edge (phi12)
+    (phi11.east) edge node[above]{\footnotesize $z_{2,1}$} (s1o)
+    (phi12.east) edge node[above]{\footnotesize $z_{2,2}$} (s2o)
+    (s1o) edge (phi211.west)
+    (s1o) edge (phi221.west)
+    (s1o) edge (phi231.west)
+    (s2o) edge (phi212.west)
+    (s2o) edge (phi222.west)
+    (s2o) edge (phi232.west)
+    (phi211.east) edge (s3)
+    (phi212.east) edge (s3)
+    (phi221.east) edge (s4)
+    (phi222.east) edge (s4)
+    (phi231.east) edge (s5)
+    (phi232.east) edge (s5)
+
+    (s3) edge (phi21)
+    (s4) edge (phi22)
+    (s5) edge (phi23)
+
+    (phi21) edge node[above]{\footnotesize $y_1$} (s3o)
+    (phi22) edge node[above]{\footnotesize $y_2$} (s4o)
+    (phi23) edge node[above]{\footnotesize $y_3$} (s5o);
+
+\end{scope}
+
+\begin{scope}[on background layer]
+\node[fit=(phi111)(phi112)(phi113)(phi121) (phi122) (phi123) (s1)(s2) (phi11) (phi12), inner sep=15pt, minimum width = 4.8cm, rectangle, rounded corners, draw=black, dashed, fill=blue!10] (nn1){};
+\hspace*{1em}
+\node[fit=(phi211)(phi212)(phi221)(phi222) (phi231) (phi232) (s3)(s4)(s5) (phi21) (phi22) (phi23), inner sep=12pt, rectangle, rounded corners, draw=black, dashed, fill=green!10, minimum width = 4.8cm, yshift=0.15cm]{};
+\end{scope}
+
+% \hspace*{2em}
+
+% \begin{scope}[xshift=8.5cm, yshift=1cm, scale=0.8]
+% %\draw[black, thick] (-2,0) to[smooth] (-1.5,0) to[smooth] (-1,0.5) to[smooth] (0,-0.7) to[smooth] (0.5,-1.2) to[smooth] (1, -0.1) to[smooth] (1.5,0) to[smooth] (2,0);
+% \draw[<->, thin, dashed] (-2.2,0) -- (2.2,0) node[below]{$z$};
+% \draw[<->, thin, dashed] (0, -1) -- (0, 1) node[right]{$\psi^{(i)}_{j,k}(z)$};
+% \draw[blue, thick] plot [smooth, tension=1] coordinates {(-1.5,0) (-1, 0.5) (-0.5, -0.2) (0.0, -0.7) (0.5, -1.2) (1.0, -0.1) (1.5, 0.0) };
+% \draw[blue, thick] (-2,0) -- (-1.5,0);
+% \draw[blue, thick] (1.52,0) -- (2,0);
+% \node at (-1.5, -0.3) {\footnotesize $-L$};
+% \node at (1.5, -0.3) {\footnotesize $L$};
+
+% \end{scope}
+\end{tikzpicture}

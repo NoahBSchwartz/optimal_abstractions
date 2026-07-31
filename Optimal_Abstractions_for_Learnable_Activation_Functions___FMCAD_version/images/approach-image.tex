@@ -1,0 +1,206 @@
+\begin{tikzpicture}[ node distance = 0.75cm,
+  phi/.style={rectangle, draw, text centered },
+  summ/.style={circle, draw, fill=red!20, text centered},
+  input/.style={circle, draw, fill=black, minimum size=0.3pt, inner sep=0.3pt},
+  % Define arrow style
+  connection/.style={draw, -latex'}
+]
+
+\begin{scope}
+    %% First layer approximating each unit (univariate function)
+    \node at (-6.5,0.75)[draw=black, fill=yellow!20]{ $1$};
+    \begin{scope}[xshift=-4.5cm]
+    %% BOUNDING BOX
+    \draw (-1.2, -0.2) rectangle (1.2,1.2);
+    %% AXES
+    \draw [<->, thick] (0, -0.2) -- (0,1.2);
+    \draw [<->, thick] (-1.2, 0) -- (1.2,0);
+    %% SPLINE 
+    \draw[blue, ultra thick] plot [smooth, tension=1] coordinates {(-1,0) (-0.8, 0.2) (-0.5, 0.5) (0.0, 1.0) (0.5, 0.7) (0.7, 0.3) (1.0, 0.0) };
+    \end{scope}
+
+    \begin{scope}[xshift=-1cm, yshift =0.5cm]
+    %% BOUNDING BOX
+    \draw (-1.2, -0.2) rectangle (1.2,1.2);
+    %% AXES
+    \draw [<->, thick] (0, -0.2) -- (0,1.2);
+    \draw [<->, thick] (-1.2, 0) -- (1.2,0);
+    %% SPLINE 
+    \draw[line width=10pt, draw=blue!10, opacity=0.5] (-1, 0) -- (0.1, 1.0) -- (1,0);
+    \draw[blue, ultra thick, dashed] plot [smooth, tension=1] coordinates {(-1,0) (-0.8, 0.2) (-0.5, 0.5) (0.0, 1.0) (0.5, 0.7) (0.7, 0.3) (1.0, 0.0) };
+
+    \draw[thick, red] (-1, 0) -- (0.1, 1.0) -- (1,0);
+
+    \node at (0,-.4) { 2 pieces};
+    \node at (0,-.7) { error $= 4.0$};
+
+    \end{scope}
+
+    \begin{scope}[xshift=1.6cm, yshift =0.5cm]
+    %% BOUNDING BOX
+    \draw (-1.2, -0.2) rectangle (1.2,1.2);
+    %% AXES
+    \draw [<->, thick] (0, -0.2) -- (0,1.2);
+    \draw [<->, thick] (-1.2, 0) -- (1.2,0);
+    %% SPLINE 
+    \draw[line width=5pt, draw=blue!10, opacity=0.5] (-1, 0) -- (-0.2, 0.9) -- (0.2, 1.0) --  (1,0);
+    \draw[blue, ultra thick, dashed] plot [smooth, tension=1] coordinates {(-1,0) (-0.8, 0.2) (-0.5, 0.5) (0.0, 1.0) (0.5, 0.7) (0.7, 0.3) (1.0, 0.0) };
+
+    \draw[thick, red] (-1, 0) -- (-0.2, 0.9) -- (0.2, 1.0) --  (1,0);
+
+    \node at (0,-.4) { 3 pieces};
+    \node at (0,-.7) { error $=1.2$};
+
+    \end{scope}
+
+    \begin{scope}[xshift=5cm, yshift =0.5cm]
+    %% BOUNDING BOX
+    \draw (-1.2, -0.2) rectangle (1.2,1.2);
+    %% AXES
+    \draw [<->, thick] (0, -0.2) -- (0,1.2);
+    \draw [<->, thick] (-1.2, 0) -- (1.2,0);
+    %% SPLINE 
+    \draw[line width=2pt, draw=blue!10, opacity=0.5]  (-1,0) --  (-0.8, 0.2) -- (-0.5, 0.48) --  (-0.2, 0.9) -- (0.0, 1.0) -- (0.1, 1.03) --  (0.3, 0.9) -- (0.5, 0.7) -- (0.7, 0.3) -- (1.0, 0.0);
+    \draw[blue, ultra thick, dashed] plot [smooth, tension=1] coordinates {(-1,0) (-0.8, 0.2) (-0.5, 0.5) (0.0, 1.0) (0.5, 0.7) (0.7, 0.3) (1.0, 0.0) };
+    \draw[thick, red] (-1,0) --  (-0.8, 0.2) -- (-0.5, 0.48) --  (-0.2, 0.9) -- (0.0, 1.0) -- (0.1, 1.03) --  (0.3, 0.9) -- (0.5, 0.7) -- (0.7, 0.3) -- (1.0, 0.0);
+
+    \node at (0,-.4) { 10 pieces};
+    \node at (0,-.7) { error $=0.02$};
+
+    \end{scope}
+
+    \node at (3.35,0.5) {\large $\cdots$};
+    % Calligraphic brace
+    \draw [decorate, line width=1pt, decoration = {calligraphic brace}] (-2.5,-0.3) -- (-2.5,1.7);
+    \draw [decorate,line width=1pt, decoration = {calligraphic brace}] (6.5,1.7) --  (6.5,-0.3);
+
+    \begin{pgfonlayer}{background}
+    \draw[draw=black, thin] (-6.5,2) rectangle (7, -0.5);
+    \end{pgfonlayer}
+\end{scope}
+
+\begin{scope}[yshift=-3.0cm]
+    \node at (-6.5,0.75)[draw=black, fill=yellow!20]{ $2$};
+
+    \node[input](n0i)  at (-6, 2) {}; 
+    \node[input, below=1cm of n0i](n1i)  {}; 
+    \node[input, below=1cm of n1i](n2i)  {}; 
+    \node[input, below=1cm of n2i](n3i)  {}; 
+
+    \node[input, right=0.6cm of n0i](n0)   {}; 
+    \node[input, right=0.6cm of n1i](n1)  {}; 
+    \node[input, right=0.6cm of n2i ](n2)  {}; 
+    \node[input, right=0.6cm of n3i](n3)  {}; 
+
+    \path[->] (n0i) edge node[above]{$x_1$} (n0)
+    (n1i) edge node[above]{$x_2$} (n1)
+    (n2i) edge node[above]{$x_3$} (n2)
+    (n3i) edge node[above]{$x_4$} (n3);
+
+    \node[phi, right=0cm of n0, name=phi11]{\scriptsize $\decor\psi{1}{1}$};
+    \node[phi, right=0cm of n1, name=phi12]{\scriptsize $\decor\psi{1}{2}$};
+    \node[phi, right=0cm of n2, name=phi13]{\scriptsize $\decor\psi{1}{3}$};
+    \node[phi, right=0cm of n3, name=phi14]{\scriptsize $\decor\psi{1}{4}$};
+
+    \node[summ, below right=0cm and 0.6cm  of phi11, name=s1]{$\sum$};
+    \node[summ, below right=0cm and 0.6cm  of phi13, name=s2]{$\sum$};
+
+    \path[->] (phi11) edge (s1) 
+    (phi12) edge (s1)
+    (phi13) edge (s2)
+    (phi14) edge (s2); 
+
+    \node[phi, right=0.3cm of s1, name=phi21]{\scriptsize $\decor\psi{2}{1}$};
+    \node[phi, right=0.3cm of s2, name=phi22]{\scriptsize $\decor\psi{2}{2}$};
+    \node[summ, below right=0.5cm and 0.3cm of phi21, name=s3]{$\sum$};
+    \node[phi, right=0.3cm of s3, name=phi31]{\scriptsize $\decor\psi{3}{1}$};
+    \node[input, name=o1, right=0.3cm of phi31]{};
+
+    \path[->] (s1) edge (phi21)
+    (s2) edge (phi22)
+    (phi21) edge (s3)
+    (phi22) edge (s3)
+    (s3) edge (phi31)
+    (phi31) edge node[above]{$y$} (o1);
+    \draw [decorate, line width=1pt, decoration = {calligraphic brace}] (0.5,2) --  (0.5,-1);
+    \node at (3.7,0.5) { \large $ \begin{array}{rcl} 
+    \err & = &  \max_{\vx \in \reals^4} \ | f_N(\vx) - \fhat_N(\vx) | \\ 
+    & \leq  & 2.5 \decor\err{1}{1} + 3 \decor\err{1}{2} + \decor\err{1}{3} +  \decor\err{1}{4} \\
+    && + 1.5 \decor\err{2}{1} + 0.6 \decor{\err}{2}{2} + 0.2 \decor\err{3}{1} \\ 
+    \end{array}$};
+
+    \begin{pgfonlayer}{background}
+    \draw[draw=black, thin] (-6.5,-1.5) rectangle (7, 2.5);
+    \end{pgfonlayer}
+\end{scope}
+
+\begin{scope}[yshift=-6.7cm]
+    \node at (-6.5,0.75)[draw=black, fill=yellow!20]{ $3$};
+    \node at (-4.3, 1.7){\scriptsize
+    $ \begin{array}{|c|ccc|}  
+    \hline 
+    \# \text{piece} & 1 &  \cdots & 20 \\  
+    \decor\err{1}{1} & 5.0 & \cdots & 0.02\\ 
+    \hline
+    \end{array}$
+    };
+
+    \node at (-4.3, 0.9){\scriptsize
+    $  \begin{array}{|c|ccc|}  
+    \hline 
+    \# \text{piece} & 1 &  \cdots & 20 \\  
+    \decor\err{1}{2} & 3.2 &  \cdots & 0.01\\ 
+    \hline
+    \end{array}$
+    };
+
+    \node at (-4.3, 0.4){$\cdots$}; 
+
+    \node at (-4.3, -0.1){\scriptsize
+    $  \begin{array}{|c|ccc|}  
+    \hline 
+    \# \text{piece} & 1 &  \cdots & 20 \\  
+    \decor\err{3}{1} & 1.7 &  \cdots & 0.1\\ 
+    \hline
+    \end{array}$
+    };
+
+    \draw [decorate,line width=1pt, decoration = {calligraphic brace}] (-2.3,1.8) --  (-2.3,-0.3);    
+    \node[input](i0) at (-2.2, 0.75){};
+
+    \node[rectangle, inner sep=5pt, draw=black, right=0.55cm of i0](n0){\begin{tabular}{c}
+    \large\textsc{Knapsack}
+    \end{tabular}};
+
+    \node[above=0.5cm of n0, name=i1]{$\delta$};
+    \node[input, below=0.7cm of n0, name=i2]{};
+    \path[->] (i0) edge (n0)
+    (i1) edge (n0)
+    (n0) edge (i2);
+
+    \node[below=0cm of i2, name=tab1]{
+    \scriptsize
+    $ \begin{array}{|c|ccc|}  
+    \hline 
+    \text{node} & \decor{\psi}{1}{1} &   \cdots & \decor\psi{3}{1} \\ 
+    \text{\# pieces} & 5 & \cdots & 6 \\ 
+    \hline 
+    \end{array}$
+    };
+
+    \node at (2,0.75)[draw=black, fill=yellow!20]{ $4$};
+
+    \node at (4.5, 0.4){ $\begin{array}{l}
+    \max/\min \;\; y \\ 
+    \mathsf{s.t} \\
+    \; \text{Constraints for PWA model} \\ 
+    \; \text{ + approximation error.}
+    \end{array}$  };
+
+    \begin{pgfonlayer}{background}
+    \draw[draw=black, thin] (-6.5,-1.4) rectangle (1.7, 2.2);
+    \draw[draw=black, thin] (2,-1.4) rectangle (7, 2.2);
+    \end{pgfonlayer}
+
+\end{scope}
+\end{tikzpicture}

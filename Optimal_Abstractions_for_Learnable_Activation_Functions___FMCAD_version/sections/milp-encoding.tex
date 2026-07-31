@@ -1,0 +1,71 @@
+\section{Mixed Integer Linear Program (MILP) Encoding}\label{sec:milp-formulation}
+
+In this section, we will briefly discuss how to solve the range verification problem given a PWA approximation of each activation function $\psi_{i,j}$ by $\psihat_{i,j}$ and corresponding error $e_{i,j}$. Our approach is to note that each PWA function $\psihat_{i,j}$ can be written as a finite weighted sum of ReLUs over the domain $[-L_{i,j}, L_{i,j}]$. Therefore, any approach that can encode ReLU NNs into a MILP can be directly adapted to encode the PWA abstraction for the purposes of solving the range verification problem. Other verification approaches  can be used as well after modifying them to account for the approximation error at each unit.  Recall that $\relu(x) = \max(x, 0)$.
+
+\begin{theorem}\label{thm:relu-encoding}
+Any continuous $k$-piece PWA function $\psi(z)$ (according to Def.~\ref{def:cpwa-function}) with $k \geq 2$ pieces and $k-1$ breakpoints can be written as a linear combination of ReLU functions: 
+\begin{equation}\label{eq:relu-equivalence}
+   \psi(z) = \left( \begin{array}{c}
+y_1 - m_0 \relu(z_1 - z) +  m_1 \relu(z - z_1) + \\
+\sum_{j=2}^{k-1} (m_j - m_{j-1}) \relu(z -z_j) 
+\end{array}\right) \,.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Let $g(z) $ represent the RHS of Eq.~\eqref{eq:relu-equivalence}. We verify that $\psi(z) = g(z)$ by running through the cases $z \leq z_1$ and then each of the cases $ z \in [z_j, z_{j+1}]$ for $j \in [1, \ldots, k-2]$ and $z \geq z_{k-1}$.
+
+First, if $z \leq z_1$, verify that $\psi(z) = y_1 + m_0( z - z_1) = y_1 - m_0 \relu(z_1 - z)$. Also, $\relu(z - z_j) = 0$ for $z \leq z_1$ since $z \leq z_1 < z_j$.
+
+Suppose $z \in [z_j, z_{j+1}]$, then note that $\relu(z_1 - z) = 0$ and
+$\relu(z - z_i) = 0$ for all $i \geq j+1$ and $\relu(z - z_i) = (z -z_i) $ whenever $i \leq j$. Therefore, 
+\[ \begin{array}{l}
+g(z)  - y_1 \\
+\; =  m_1 \relu(z - z_1) + \sum_{i=2}^{j} (m_i - m_{i-1}) \relu(z - z_i) \\ 
+\; =  m_1 (z - z_1) +  \sum_{i=2}^{j} (m_i - m_{i-1}) (z - z_i) \\ 
+\; =  \left( m_1 + (m_2 - m_1) + \cdots + (m_j - m_{j - 1}) \right) z  \\ 
+\;\;\;- \underset{\Delta_2}{\underbrace{( m_1 (z_2 - z_1) + \cdots + m_{j-1}(z_{j} - z_{j-1}) )}} - m_j z_j \\ 
+\; =  m_j z  - m_j z_j + y_{j} - y_1
+\end{array}\]
+This is because $m_1 + (m_2 - m_1) + \cdots + (m_j - m_{j-1}) = m_j$ and 
+furthermore, $m_1 (z_2 - z_1) = y_2 - y_1$, $m_2 (z_3 - z_2) = y_3 - y_2 $, $\cdots$, $m_{j-1}(z_{j} - z_{j-1}) = y_{j} - y_{j-1}$. Therefore, $\Delta_2 = y_2 - y_1 + y_3 - y_2 + \cdots + y_j - y_{j-1} = y_j - y_1$. Combining, 
+$g(z) = y_j + m_j (z - z_j) = \psi(z)$ whenever $z \in [z_j, z_{j+1}]$. An identical argument applies when $z \geq z_{k-1}$ to yield $g(z) = y_{k-1}+ m_{k-1} (z - z_{k-1}) = \psi(z)$. The required identity is thus verified to hold. 
+\end{proof}
+
+As a result, the MILP encoding is identical to existing approaches to neural network verification using mixed integer programming~\cite{tjeng_xiao_tedrake_2017,dutta_chen_jha_sriram_sankaranarayanan_tiwari_2019,lomuscio_maganti_2017} with the addition of an extra continuous variable $\epsilon_{i,j}$ at each node to represent the error between the PWA approximation and the original result.  
+Due to space limitations, the details of the ReLU encoding are given in Appendix~\ref{sec:milp-encoding}.
+
+Theorem~\ref{thm:relu-encoding} also points to a more general approach to verification. Because every PWA abstraction can be rewritten as a sum of ReLU units, our abstraction is exactly a ReLU network augmented with a bounded, nondeterministic error term $\epsilon_{i,j}$ at each unit. Any verification backend that already handles ReLU networks and admits a bounded slack variable per unit can therefore reason over our abstraction directly. MILP-based approaches handle this natively, as detailed in Appendix~\ref{sec:milp-encoding}. SMT-based tools such as Reluplex~\cite{katz_barrett_dill_julian_kochenderfer_2017} and Marabou~\cite{katz_huang_2019} can do so as well, by treating each $\epsilon_{i,j}$ as an additional bounded real-valued variable. Bound-propagation approaches such as CROWN~\cite{zhang_weng_chen_hsieh_daniel_2018} and DeepPoly~\cite{Singh+Others/2019/Beyond} require a further modification to propagate these per-unit error intervals alongside the usual activation bounds. This is not conceptually difficult, but it does require implementation changes rather than a direct as-is application of these tools.
+
+
+\begin{comment}
+In this section, we will sketch a Mixed Integer Linear Programming (MILP) formulation for computing the output ranges for a piecewise linearized NN while incorporating the error bounds to yield a result that overapproximates the output range for the original nonlinear NN model. The MILP formulation encodes the semantics of each piecewise linearized unit using a combination of binary and real valued variables.
+
+Let $\psihat$ be a piecewise linearized model corresponding to the unit $\psi$ in the KAN with the error
+$\max_{z \in [-L, L]} | \psihat - \psi| = \err$. Assume that $\psihat$ has $\ell$ pieces:
+\[ \psihat(z)  =
+		a_i z + b_i \ \text{if}\ z \in [z_i, z_{i+1}], \ i \in \{ 0, \ldots, \ell-1\} \]
+Suppose $z$ denotes the real-valued input to $\psi$  and $y$ denotes the (real-valued) output. We will add a vector of $\ell+2$ binary variables $\vec{w} = (w_{-1}, \ldots, w_{\ell})$ wherein  $w_{-1}$ will be $1$ if $z \leq -L$, $w_i = 1$ if $z \in [z_{i}, z_{i+1}]$ and $w_\ell=1$ if $z \geq L$.
+
+First, we enforce that the input can belong to just one interval: $w_{-1} + w_0 + \cdots + w_{\ell}  = 1$. Let $M_z > 0$ be a large enough number such that the input $z$ to the unit satisfies $|z| \leq M_z$. The estimation of $M_z$ will be detailed in Appendix~\ref{app:big-M-estimation}. 
+
+We encode the implication $ w_{-1} =1 \Rightarrow\ z \leq -L $ using the ``M-trick''~\cite{williams2013model} i.e. $ z \ \leq\ -L w_{-1}  + M_z (1-w_{-1})$. The remaining constraints over $z$ are as follows:
+\begin{equation*}
+	\begin{array}{ll}
+		z_i w_i - M_z (1-w_i)\ \leq\ z \ \leq\ z_{i+1} w_i + M_z (1-w_i)  \ \leftarrow\ \\ \text{Big-M trick}: w_{i} = 1 \ \Rightarrow\ z \in [z_i, z_{i+1}]                                      \\
+		z\ \geq\  L w_{\ell} - M_z (1 - w_{\ell}) \ \leftarrow\ \\ \text{Big-M trick}: w_{\ell} = 1 \ \Rightarrow\ z \geq L \\
+	\end{array}
+\end{equation*}
+We now consider constraints on the output $y$. Let $M_y$ be such that $\forall z\ | \psi(z) | \leq M_y$.  The estimation of $M_y$ is based on the known function $\hat{\psi}$ and error bound $e$, and is also explained in Appendix~\ref{app:big-M-estimation}.
+
+The constraints on the output include:
+\begin{equation*}
+	\begin{array}{l}
+		0 w_{-1} - M_y (1-w_{-1}) \leq y  \leq 0 w_{-1} + M_y (1 - w_{-1})  \ \ \leftarrow\ \\
+        \text{Big-M trick}: w_{-1} = 1 \ \Rightarrow\ y = 0 \\
+		a_i z + b_i - \err - (2 M_y ) (1-w_{i})  \\ \leq y  \leq a_i z + b_i +  \err + (2 M_y ) (1 - w_{i}) \\
+		0 w_{\ell} - M_y (1-w_{\ell}) \leq y  \leq 0 w_{\ell} + M_y (1 - w_{\ell}) 
+	\end{array}
+\end{equation*}
+We note that the MILP encoding of each unit yields constraints that relate its outputs to the inputs. The overall constraint for a KAN combines that for each unit, while ensuring that the set of binary variables used for various units are distinct. The encoding of summation nodes is straightforward.
+
+\end{comment}
