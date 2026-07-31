@@ -146,3 +146,52 @@ Set parameter Presolve to value -1
 Set parameter Method to value 6
 Set parameter TimeLimit to value 1000
 Set parameter Presolve to value -1
+    Opt (eq-budget, 2260 segs): width=19.2574, milp=37.732s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=19.7753, milp=2.392s
+Saved graph data to logs/graph_data_prosthetic.json
+
+=== weather ===
+  theoretical min error: 140.7862, n_splines: 2784, dp_time: 1.451s
+  Testing total segment budget: 5568 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt k=2 (budget=5568): width=9.3175, ilp=0.277s, milp=1.660s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=2: width=8.5996, milp=2.159s
+  Testing total segment budget: 8352 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt k=3 (budget=8352): width=8.5253, ilp=0.413s, milp=14.815s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=3: width=9.2468, milp=32.935s
+  Testing total segment budget: 11136 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt k=4 (budget=11136): width=8.3975, ilp=0.292s, milp=76.774s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=4: width=8.5785, milp=37.194s
+  Testing total segment budget: 13920 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt k=5 (budget=13920): width=8.2350, ilp=0.284s, milp=90.522s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=8.2956, milp=106.193s
+  Testing total segment budget: 16704 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
