@@ -13,17 +13,19 @@ import torch.nn.functional as F
 from gurobipy import GRB
 from joblib import Parallel, delayed
 
-
 log_filename    = "logs/verification_log.txt"
 MODEL_DIR       = 'model_pkls'
-FILENAME_FILTER = []
-EXCLUDE         = ["cifar", "acopf_ml4aconpf2"]
-SEGMENT_COUNTS  = [2, 3, 4, 5, 6, 7, 8]
+# FILENAME_FILTER = ["xy", "exp100", "pinn", "exp4"]
+FILENAME_FILTER = ["func"]
+EXCLUDE         = []
+SEGMENT_COUNTS  = [2, 3, 4, 5, 6, 7]
 INPUT_WIDTHS    = [0.01, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0]
-TIME_LIMIT      = 500
-MIP_GAP         = 0.05
-MAX_SEGMENTS    = max(50, 2 * SEGMENT_COUNTS[-1])  
-FIXED_IW        = INPUT_WIDTHS[-1]   # total input-box width; bounds are +-FIXED_IW/2 (bug fix 4)
+TIME_LIMIT      = 1000
+MIP_GAP         = 0.01
+MAX_SEGMENTS    = SEGMENT_COUNTS[-1]
+FIXED_IW        = INPUT_WIDTHS[-1]
+K_MID           = SEGMENT_COUNTS[len(SEGMENT_COUNTS) // 2]
+MAX_NEURON_TO_SOLVE = 5
 
 # Curve-sampling grid sizes for domain-aware fitting (bug fix 1)
 N_GRID_UNIFORM  = 1000
@@ -283,7 +285,8 @@ def compute_dp_tables_lipschitz(kan_model, max_segments, input_lb, input_ub):
                 tasks.append((key, x_grid, y_all[:, output_idx].astype(float)))
 
         results_list = Parallel(n_jobs=-1)(
-            delayed(process_single_spline)(key, xg, yv, max_segments) for key, xg, yv in tasks)
+            delayed(process_single_spline)(key, xg, yv, max_segments) for key, xg, yv in tasks
+        )
 
         next_lo = np.zeros(layer.output_dim)
         next_hi = np.zeros(layer.output_dim)
@@ -343,6 +346,7 @@ def weight_dp_tables_lipschitz(kan_model, error_tables, segments_tables, lipschi
 
 def solve_best_segment_allocation(weighted_error_tables, target_max_error):
     model = gp.Model()
+    model.setParam("Method", 6)
     model.setParam("OutputFlag", 0)
     x = {}
     binary_vars_for_splines = {}
@@ -423,6 +427,7 @@ def propagate_kan_intervals(kan_shape, segments_tables, error_tables, optimal_al
 
 def build_kan_milp_model(kan_shape, segments_tables, error_tables, optimal_allocation, x_min_vec, x_max_vec):
     model = gp.Model()
+    model.setParam("Method", 6)
     input_dim = kan_shape[0]
     all_layer_variables = []
 
@@ -476,7 +481,7 @@ def build_kan_milp_model(kan_shape, segments_tables, error_tables, optimal_alloc
 def solve_kan_interval_milp(kan_shape, segments_tables, error_tables, optimal_allocation, output_layer_mip_gap, x_min_vec, x_max_vec, time_limit):
     precomputed_bounds = propagate_kan_intervals(kan_shape, segments_tables, error_tables, optimal_allocation, x_min_vec, x_max_vec)
     model, all_layer_variables = build_kan_milp_model(kan_shape, segments_tables, error_tables, optimal_allocation, x_min_vec, x_max_vec)
-    model.setParam("PreSolve", 2)
+    model.setParam("PreSolve", -1)
     model.setParam("OutputFlag", 0)
 
     for layer_idx, vars_in_layer in enumerate(all_layer_variables):
@@ -517,6 +522,8 @@ def solve_kan_interval_milp(kan_shape, segments_tables, error_tables, optimal_al
             max_val = float("inf")
         return min_val, max_val
 
+    if len(target_indices) >= MAX_NEURON_TO_SOLVE:
+        target_indices = target_indices[:MAX_NEURON_TO_SOLVE]
     results = Parallel(n_jobs=-1, backend="threading")(delayed(solve_single_neuron)(idx) for idx in target_indices)
     min_bounds = np.array([r[0] for r in results])
     max_bounds = np.array([r[1] for r in results])
@@ -527,6 +534,7 @@ def verify_mlp_gurobi_lib(model, input_lb, input_ub, output_layer_mip_gap=0.05, 
     from gurobi_ml import add_predictor_constr
     start_time = time.time()
     m = gp.Model("mlp_verification_lib")
+    model.setParam("Method", 6)
     m.setParam("OutputFlag", 0)
     input_dim = len(input_lb)
     input_vars = m.addMVar((1, input_dim), lb=input_lb, ub=input_ub, name="input")
@@ -563,6 +571,8 @@ def verify_mlp_gurobi_lib(model, input_lb, input_ub, output_layer_mip_gap=0.05, 
             max_val = float("inf")
         return min_val, max_val
 
+    if len(target_indices) >= MAX_NEURON_TO_SOLVE:
+        target_indices = target_indices[:MAX_NEURON_TO_SOLVE]
     results = Parallel(n_jobs=-1, backend="threading")(delayed(solve_single_neuron)(idx) for idx in target_indices)
     min_outputs = np.array([r[0] for r in results])
     max_outputs = np.array([r[1] for r in results])
@@ -715,6 +725,18 @@ def allocate_segments_under_budget(weighted_error_tables, total_budget):
         return alloc, model.ObjVal, used
     return None, float('inf'), 0
 
+def _to_python(obj):
+    if isinstance(obj, dict):
+        return {k: _to_python(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_to_python(v) for v in obj]
+    if isinstance(obj, float) and np.isnan(obj):
+        return None
+    if isinstance(obj, (np.floating, np.integer)):
+        return obj.item()
+    if isinstance(obj, np.ndarray):
+        return [_to_python(v) for v in obj.tolist()]
+    return obj
 
 graph_data = {}
 curves_by_prefix, shape_by_prefix, tables_by_prefix = {}, {}, {}
@@ -801,14 +823,16 @@ for prefix, pair in sorted(pairs.items(), key=lambda kv: os.path.getsize(os.path
         print(f"    Van k={k}: width={w:.4f}, milp={t:.3f}s")
         van_pareto.append((t, w))
 
-    alloc_iw, _ = solve_best_segment_allocation(weighted, theo_min * 1.5)
-    n_delta = sum(alloc_iw.values()) if alloc_iw is not None else 0
-    # Bug fix 5: the delta allocation uses ~3x the Vanilla k=10 budget; state the
+    # alloc_iw, _ = solve_best_segment_allocation(weighted, theo_min * 1.5)
+    alloc_iw, _, _ = allocate_segments_under_budget(weighted, K_MID * n_splines)
+    n_delta = sum(alloc_iw.values()) if alloc_iw is not None else 0    
+    # Bug fix 5: the delta allocation uses ~some_x the Vanilla k=K_MID budget; state the
     # budgets explicitly and also report an equal-budget optimized allocation.
-    alloc_eq, _, n_eq = allocate_segments_under_budget(weighted, 10 * n_splines)
+    alloc_eq, _, n_eq = allocate_segments_under_budget(weighted, K_MID * n_splines)
+
     print(f"  Input sweep allocations: delta-based uses {n_delta} segments "
           f"({n_delta / max(n_splines, 1):.1f}/spline); equal-budget uses {n_eq} "
-          f"(Van k=10 uses {10 * n_splines})")
+          f"(Van k={K_MID} uses {K_MID * n_splines})")
     opt_input_sweep = []
     opt_input_sweep_eq = []
     van_input_sweep = []
@@ -834,12 +858,12 @@ for prefix, pair in sorted(pairs.items(), key=lambda kv: os.path.getsize(os.path
         opt_input_sweep_eq.append((iw, width(mn, mx), opt_eq_t))
         print(f"    Opt (eq-budget, {n_eq} segs): width={width(mn, mx):.4f}, milp={opt_eq_t:.3f}s")
 
-        van_alloc = {key: 10 for key in seg_t.keys()}
+        van_alloc = {key: K_MID for key in seg_t.keys()}
         t0 = time.time()
         mn, mx = solve_kan_interval_milp(kan_shape, seg_t, err_t, van_alloc, MIP_GAP, lb_w, ub_w, TIME_LIMIT)
         t = time.time() - t0
         van_input_sweep.append((iw, width(mn, mx), t))
-        print(f"    Van k=10: width={width(mn, mx):.4f}, milp={t:.3f}s")
+        print(f"    Van k={K_MID}: width={width(mn, mx):.4f}, milp={t:.3f}s")
 
     graph_data[prefix] = {
         'n_params': n_params,
@@ -850,12 +874,24 @@ for prefix, pair in sorted(pairs.items(), key=lambda kv: os.path.getsize(os.path
         'van_input_sweep': van_input_sweep,
         'delta_alloc_segments': n_delta,
         'eq_alloc_segments': n_eq,
-        'van_sweep_segments': 10 * n_splines,
+        'mid_alloc_segments': K_MID * n_splines,    
+        'van_sweep_segments': K_MID * n_splines,
         'dp_time': dp_time,
         'ilp_time': ilp_times,
         'milp_time': milp_times,
         'van_time': van_times,
     }
+
+    save_payload = {
+        "filename": prefix,
+        "SEGMENT_COUNTS": SEGMENT_COUNTS,
+        "INPUT_WIDTHS": INPUT_WIDTHS,
+        "graph_data": {prefix: _to_python(graph_data[prefix])},
+    }
+    save_path = f"logs/graph_data_{prefix}.json"
+    with open(save_path, "w") as f:
+        json.dump(save_payload, f, indent=2)
+    print(f"Saved graph data to {save_path}")
 
 prefixes = list(graph_data.keys())
 
@@ -863,31 +899,31 @@ print("\n" + "=" * 60)
 print("TIMING SUMMARY")
 print("=" * 60)
 
-def _to_python(obj):
-    if isinstance(obj, dict):
-        return {k: _to_python(v) for k, v in obj.items()}
-    if isinstance(obj, (list, tuple)):
-        return [_to_python(v) for v in obj]
-    if isinstance(obj, float) and np.isnan(obj):
-        return None
-    if isinstance(obj, (np.floating, np.integer)):
-        return obj.item()
-    if isinstance(obj, np.ndarray):
-        return [_to_python(v) for v in obj.tolist()]
-    return obj
+# def _to_python(obj):
+#     if isinstance(obj, dict):
+#         return {k: _to_python(v) for k, v in obj.items()}
+#     if isinstance(obj, (list, tuple)):
+#         return [_to_python(v) for v in obj]
+#     if isinstance(obj, float) and np.isnan(obj):
+#         return None
+#     if isinstance(obj, (np.floating, np.integer)):
+#         return obj.item()
+#     if isinstance(obj, np.ndarray):
+#         return [_to_python(v) for v in obj.tolist()]
+#     return obj
 
 
-for p in prefixes:
-    save_payload = {
-        "filename": p,
-        "SEGMENT_COUNTS": SEGMENT_COUNTS,
-        "INPUT_WIDTHS": INPUT_WIDTHS,
-        "graph_data": {p: _to_python(graph_data[p])},
-    }
-    save_path = f"logs/graph_data_{p}.json"
-    with open(save_path, "w") as f:
-        json.dump(save_payload, f, indent=2)
-    print(f"Saved graph data to {save_path}")
+# for p in prefixes:
+#     save_payload = {
+#         "filename": p,
+#         "SEGMENT_COUNTS": SEGMENT_COUNTS,
+#         "INPUT_WIDTHS": INPUT_WIDTHS,
+#         "graph_data": {p: _to_python(graph_data[p])},
+#     }
+#     save_path = f"logs/graph_data_{p}.json"
+#     with open(save_path, "w") as f:
+#         json.dump(save_payload, f, indent=2)
+#     print(f"Saved graph data to {save_path}")
 
 for p in sorted(prefixes, key=lambda p: graph_data[p]["n_params"]):
     d = graph_data[p]

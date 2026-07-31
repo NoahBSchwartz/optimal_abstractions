@@ -1,125 +1,1084 @@
 Logging started. Writing to logs/verification_log.txt...
 
-=== functionxy ===
-  theoretical min error: 0.0400, n_splines: 6, dp_time: 0.725s
-  Testing total segment budget: 12 (k=2 per spline for Van)
+=== functionbessel ===
+  theoretical min error: 0.3977, n_splines: 1, dp_time: 0.085s
+  Testing total segment budget: 2 (k=2 per spline for Van)
 Set parameter Username
-Set parameter LicenseID to value 2849196
-Academic license - for non-commercial use only - expires 2027-07-29
-Set parameter Presolve to value 2
-    Opt k=2 (budget=12): width=3.6330, ilp=0.013s, milp=0.016s
-Set parameter Presolve to value 2
-    Van k=2: width=3.6637, milp=0.013s
-  Testing total segment budget: 18 (k=3 per spline for Van)
-Set parameter Presolve to value 2
-    Opt k=3 (budget=18): width=3.6272, ilp=0.007s, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=3: width=3.3243, milp=0.014s
-  Testing total segment budget: 24 (k=4 per spline for Van)
-Set parameter Presolve to value 2
-    Opt k=4 (budget=24): width=2.8322, ilp=0.006s, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=4: width=2.8933, milp=0.014s
-  Testing total segment budget: 30 (k=5 per spline for Van)
-Set parameter Presolve to value 2
-    Opt k=5 (budget=30): width=2.7705, ilp=0.007s, milp=0.015s
-Set parameter Presolve to value 2
-    Van k=5: width=2.6724, milp=0.027s
-  Testing total segment budget: 36 (k=6 per spline for Van)
-Set parameter Presolve to value 2
-    Opt k=6 (budget=36): width=2.4060, ilp=0.006s, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=6: width=2.5823, milp=0.024s
-  Testing total segment budget: 42 (k=7 per spline for Van)
-Set parameter Presolve to value 2
-    Opt k=7 (budget=42): width=2.2540, ilp=0.008s, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=7: width=2.3403, milp=0.014s
-  Testing total segment budget: 48 (k=8 per spline for Van)
-Set parameter Presolve to value 2
-    Opt k=8 (budget=48): width=2.0970, ilp=0.006s, milp=0.038s
-Set parameter Presolve to value 2
-    Van k=8: width=2.2250, milp=0.027s
-  Input sweep allocations: delta-based uses 182 segments (30.3/spline); equal-budget uses 60 (Van k=10 uses 60)
+Set parameter LicenseID to value 2849421
+Academic license - for non-commercial use only - expires 2027-07-30
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=2): width=1.7171, ilp=0.314s, milp=0.016s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=1.7171, milp=0.013s
+  Testing total segment budget: 3 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=3): width=1.7161, ilp=0.000s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=1.7161, milp=0.013s
+  Testing total segment budget: 4 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=4): width=2.1622, ilp=0.000s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=2.1622, milp=0.014s
+  Testing total segment budget: 5 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=5 (budget=5): width=2.2787, ilp=0.000s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.2787, milp=0.013s
+  Testing total segment budget: 6 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=6 (budget=6): width=2.0949, ilp=0.000s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=6: width=2.0949, milp=0.014s
+  Testing total segment budget: 7 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=7 (budget=7): width=2.0731, ilp=0.000s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=7: width=2.0731, milp=0.013s
+  Input sweep allocations: delta-based uses 5 segments (5.0/spline); equal-budget uses 5 (Van k=5 uses 5)
   Testing input width: 0.01 (bounds=(-0.005, 0.005))
-Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=0.0391, milp=0.015s
-Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=0.2351, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=10: width=0.2594, milp=0.012s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 5 segs): width=1.0463, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 5 segs): width=1.0463, milp=0.012s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=1.0463, milp=0.012s
   Testing input width: 0.05 (bounds=(-0.025, 0.025))
-Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=0.0419, milp=0.015s
-Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=0.2464, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=10: width=0.2688, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 5 segs): width=1.1989, milp=0.012s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 5 segs): width=1.1989, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=1.1989, milp=0.013s
   Testing input width: 0.1 (bounds=(-0.050, 0.050))
-Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=0.0453, milp=0.013s
-Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=0.2541, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=10: width=0.2764, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 5 segs): width=1.3271, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 5 segs): width=1.3271, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=1.3271, milp=0.013s
   Testing input width: 0.5 (bounds=(-0.250, 0.250))
-Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=0.1729, milp=0.014s
-Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=0.4525, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=10: width=0.4808, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 5 segs): width=2.2787, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 5 segs): width=2.2787, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.2787, milp=0.013s
   Testing input width: 1.0 (bounds=(-0.500, 0.500))
-Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=0.5677, milp=0.015s
-Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=0.9163, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=10: width=1.0034, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 5 segs): width=2.2787, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 5 segs): width=2.2787, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.2787, milp=0.013s
   Testing input width: 2.0 (bounds=(-1.000, 1.000))
-Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=1.8438, milp=0.014s
-Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=2.0427, milp=0.014s
-Set parameter Presolve to value 2
-    Van k=10: width=2.1399, milp=0.012s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 5 segs): width=2.2787, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 5 segs): width=2.2787, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.2787, milp=0.013s
   Testing input width: 5.0 (bounds=(-2.500, 2.500))
-Set parameter Presolve to value 2
-    Opt (delta, 182 segs): width=1.8438, milp=0.050s
-Set parameter Presolve to value 2
-    Opt (eq-budget, 60 segs): width=2.0440, milp=0.027s
-Set parameter Presolve to value 2
-    Van k=10: width=2.1404, milp=0.026s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 5 segs): width=2.2787, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 5 segs): width=2.2787, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.2787, milp=0.012s
+Saved graph data to logs/graph_data_functionbessel.json
 
-============================================================
-TIMING SUMMARY
-============================================================
+=== functionexp ===
+  theoretical min error: 3.1740, n_splines: 3, dp_time: 0.044s
+  Testing total segment budget: 6 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=6): width=13.5558, ilp=0.002s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=9.6634, milp=0.013s
+  Testing total segment budget: 9 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=9): width=9.2338, ilp=0.001s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=8.8763, milp=0.013s
+  Testing total segment budget: 12 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=12): width=8.1738, ilp=0.001s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=8.3487, milp=0.012s
+  Testing total segment budget: 15 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=5 (budget=15): width=8.1738, ilp=0.001s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=8.1738, milp=0.013s
+  Testing total segment budget: 18 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=6 (budget=18): width=8.3165, ilp=0.001s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=6: width=8.1037, milp=0.013s
+  Testing total segment budget: 21 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=7 (budget=21): width=7.8948, ilp=0.000s, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=7: width=7.8948, milp=0.013s
+  Input sweep allocations: delta-based uses 15 segments (5.0/spline); equal-budget uses 15 (Van k=5 uses 15)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 15 segs): width=2.6715, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 15 segs): width=2.6715, milp=0.012s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.9577, milp=0.013s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 15 segs): width=2.8309, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 15 segs): width=2.8309, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=3.1212, milp=0.014s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 15 segs): width=3.0301, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 15 segs): width=3.0301, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=3.3255, milp=0.013s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 15 segs): width=4.6237, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 15 segs): width=4.6237, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=4.9599, milp=0.013s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 15 segs): width=6.2999, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 15 segs): width=6.2999, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.8925, milp=0.013s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 15 segs): width=7.6378, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 15 segs): width=7.6378, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=7.8552, milp=0.013s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 15 segs): width=8.1738, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 15 segs): width=8.1738, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=8.1738, milp=0.013s
+Saved graph data to logs/graph_data_functionexp.json
+
+=== functionxy ===
+  theoretical min error: 0.6715, n_splines: 6, dp_time: 0.058s
+  Testing total segment budget: 12 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=12): width=3.6358, ilp=0.003s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=3.6575, milp=0.014s
+  Testing total segment budget: 18 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=18): width=3.6129, ilp=0.003s, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=3.3304, milp=0.014s
+  Testing total segment budget: 24 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=24): width=2.8991, ilp=0.002s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=2.9482, milp=0.014s
+  Testing total segment budget: 30 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=5 (budget=30): width=2.6994, ilp=0.002s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.6925, milp=0.015s
+  Testing total segment budget: 36 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=6 (budget=36): width=2.3299, ilp=0.002s, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=6: width=2.5720, milp=0.015s
+  Testing total segment budget: 42 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=7 (budget=42): width=2.3029, ilp=0.001s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=7: width=2.3029, milp=0.014s
+  Input sweep allocations: delta-based uses 30 segments (5.0/spline); equal-budget uses 30 (Van k=5 uses 30)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 30 segs): width=0.9642, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 30 segs): width=0.9642, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=0.9359, milp=0.014s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 30 segs): width=0.9924, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 30 segs): width=0.9924, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=0.9600, milp=0.014s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 30 segs): width=1.0306, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 30 segs): width=1.0306, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=0.9919, milp=0.014s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 30 segs): width=1.3320, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 30 segs): width=1.3320, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=1.2478, milp=0.014s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 30 segs): width=1.7087, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 30 segs): width=1.7087, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=1.6291, milp=0.014s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 30 segs): width=2.7041, milp=0.024s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 30 segs): width=2.7041, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.6976, milp=0.014s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 30 segs): width=2.6994, milp=0.024s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 30 segs): width=2.6994, milp=0.025s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.6925, milp=0.015s
 Saved graph data to logs/graph_data_functionxy.json
 
-functionxy  (60 params)
-  DP abstraction (one-time): 0.725s
-     k     ILP (s)    MILP (s)     Van (s)
-     2       0.013       0.016       0.013
-     3       0.007       0.014       0.014
-     4       0.006       0.014       0.014
-     5       0.007       0.015       0.027
-     6       0.006       0.014       0.024
-     7       0.008       0.014       0.014
-     8       0.006       0.038       0.027
-============================================================
+=== functionlegendre ===
+  theoretical min error: 5.5144, n_splines: 10, dp_time: 0.059s
+  Testing total segment budget: 20 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=20): width=8.4155, ilp=0.003s, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=11.5221, milp=0.014s
+  Testing total segment budget: 30 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=30): width=6.8619, ilp=0.002s, milp=0.067s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=8.8693, milp=0.024s
+  Testing total segment budget: 40 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=40): width=6.0274, ilp=0.003s, milp=0.067s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=10.4422, milp=0.045s
+  Testing total segment budget: 50 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=5 (budget=50): width=5.0656, ilp=0.002s, milp=0.088s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=7.7145, milp=0.128s
+  Testing total segment budget: 60 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=6 (budget=60): width=4.8441, ilp=0.002s, milp=0.117s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=6: width=5.5098, milp=0.149s
+  Testing total segment budget: 70 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=7 (budget=70): width=4.7533, ilp=0.001s, milp=0.089s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=7: width=4.7533, milp=0.098s
+  Input sweep allocations: delta-based uses 50 segments (5.0/spline); equal-budget uses 50 (Van k=5 uses 50)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 50 segs): width=2.0446, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 50 segs): width=2.0446, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.4540, milp=0.015s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 50 segs): width=2.0710, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 50 segs): width=2.0710, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.5069, milp=0.014s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 50 segs): width=2.1066, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 50 segs): width=2.1066, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.5687, milp=0.014s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 50 segs): width=2.5192, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 50 segs): width=2.5192, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=3.0628, milp=0.015s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 50 segs): width=3.3475, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 50 segs): width=3.3475, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=3.9329, milp=0.014s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 50 segs): width=5.0074, milp=0.078s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 50 segs): width=5.0074, milp=0.067s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=7.7239, milp=0.067s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 50 segs): width=5.0656, milp=0.088s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 50 segs): width=5.0656, milp=0.088s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=7.7145, milp=0.138s
+Saved graph data to logs/graph_data_functionlegendre.json
 
-=== True Vanilla: functionxy ===
-Set parameter Presolve to value 2
-    True Van k=2: width=5.4272, milp=0.013s
-Set parameter Presolve to value 2
-    True Van k=3: width=4.4134, milp=0.012s
-Set parameter Presolve to value 2
-    True Van k=4: width=5.1889, milp=0.014s
-Set parameter Presolve to value 2
-    True Van k=5: width=4.3208, milp=0.024s
-Set parameter Presolve to value 2
-    True Van k=6: width=3.5719, milp=0.024s
-Set parameter Presolve to value 2
-    True Van k=7: width=3.2015, milp=0.013s
-Set parameter Presolve to value 2
-    True Van k=8: width=2.9436, milp=0.013s
+=== funcellipeinc ===
+  theoretical min error: 4.0399, n_splines: 7, dp_time: 0.048s
+  Testing total segment budget: 14 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=14): width=4.6125, ilp=0.003s, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=4.6106, milp=0.015s
+  Testing total segment budget: 21 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=21): width=4.6125, ilp=0.002s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=5.0184, milp=0.014s
+  Testing total segment budget: 28 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=28): width=4.9694, ilp=0.002s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=4.9446, milp=0.014s
+  Testing total segment budget: 35 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=5 (budget=35): width=4.7681, ilp=0.002s, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=4.9694, milp=0.014s
+  Testing total segment budget: 42 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=6 (budget=42): width=4.7072, ilp=0.002s, milp=0.025s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=6: width=4.7119, milp=0.015s
+  Testing total segment budget: 49 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=7 (budget=49): width=4.6257, ilp=0.001s, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=7: width=4.6357, milp=0.014s
+  Input sweep allocations: delta-based uses 35 segments (5.0/spline); equal-budget uses 35 (Van k=5 uses 35)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=1.5963, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=1.5963, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.0661, milp=0.014s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=1.6626, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=1.6626, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.1388, milp=0.015s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=1.7473, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=1.7473, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.2297, milp=0.014s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=2.7136, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=2.7136, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=3.0495, milp=0.015s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=3.7246, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=3.7246, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=4.0593, milp=0.015s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=4.7503, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=4.7503, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=4.9694, milp=0.015s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=4.7681, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=4.7681, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=4.9694, milp=0.014s
+Saved graph data to logs/graph_data_funcellipeinc.json
+
+=== funcellipkinc ===
+  theoretical min error: 13.5546, n_splines: 7, dp_time: 0.048s
+  Testing total segment budget: 14 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=14): width=8.7781, ilp=0.003s, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=6.4193, milp=0.015s
+  Testing total segment budget: 21 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=21): width=8.7781, ilp=0.002s, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=7.6226, milp=0.014s
+  Testing total segment budget: 28 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=28): width=6.3160, ilp=0.002s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=6.4570, milp=0.015s
+  Testing total segment budget: 35 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=5 (budget=35): width=6.4570, ilp=0.002s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.7033, milp=0.014s
+  Testing total segment budget: 42 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=6 (budget=42): width=6.4570, ilp=0.002s, milp=0.025s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=6: width=6.6523, milp=0.015s
+  Testing total segment budget: 49 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=7 (budget=49): width=6.6139, ilp=0.001s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=7: width=6.6139, milp=0.014s
+  Input sweep allocations: delta-based uses 35 segments (5.0/spline); equal-budget uses 35 (Van k=5 uses 35)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=4.8437, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=4.8437, milp=0.016s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=4.8964, milp=0.015s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=4.9034, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=4.9034, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=4.9878, milp=0.014s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=4.9764, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=4.9764, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=5.1019, milp=0.014s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=5.5524, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=5.5524, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.0153, milp=0.013s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=6.2783, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=6.2783, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.7033, milp=0.012s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=6.4570, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=6.4570, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.7033, milp=0.023s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 35 segs): width=6.4570, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 35 segs): width=6.4570, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.7033, milp=0.013s
+Saved graph data to logs/graph_data_funcellipkinc.json
+
+=== funcsphharm ===
+  theoretical min error: 7.9095, n_splines: 14, dp_time: 0.060s
+  Testing total segment budget: 28 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=28): width=5.4772, ilp=0.003s, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=5.0764, milp=0.013s
+  Testing total segment budget: 42 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=42): width=5.4772, ilp=0.002s, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=5.3856, milp=0.014s
+  Testing total segment budget: 56 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=56): width=5.2555, ilp=0.002s, milp=0.056s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=5.8659, milp=0.024s
+  Testing total segment budget: 70 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=5 (budget=70): width=5.1109, ilp=0.001s, milp=0.056s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=5.4906, milp=0.056s
+  Testing total segment budget: 84 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=6 (budget=84): width=4.9437, ilp=0.002s, milp=0.066s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=6: width=5.4615, milp=0.056s
+  Testing total segment budget: 98 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=7 (budget=98): width=4.9947, ilp=0.001s, milp=0.055s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=7: width=4.9947, milp=0.065s
+  Input sweep allocations: delta-based uses 70 segments (5.0/spline); equal-budget uses 70 (Van k=5 uses 70)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 70 segs): width=2.5727, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 70 segs): width=2.5727, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=3.7221, milp=0.013s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 70 segs): width=2.6252, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 70 segs): width=2.6252, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=3.8391, milp=0.013s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 70 segs): width=2.6908, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 70 segs): width=2.6908, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=3.9458, milp=0.013s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 70 segs): width=3.2687, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 70 segs): width=3.2687, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=4.5376, milp=0.013s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 70 segs): width=3.9999, milp=0.013s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 70 segs): width=3.9999, milp=0.024s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=5.1491, milp=0.023s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 70 segs): width=5.1039, milp=0.033s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 70 segs): width=5.1039, milp=0.044s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=5.4906, milp=0.025s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 70 segs): width=5.1109, milp=0.044s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 70 segs): width=5.1109, milp=0.034s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=5.4906, milp=0.034s
+Saved graph data to logs/graph_data_funcsphharm.json
+
+=== functionexp4 ===
+  theoretical min error: 28.8000, n_splines: 26, dp_time: 0.085s
+  Testing total segment budget: 52 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=52): width=8.4048, ilp=0.004s, milp=0.016s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=7.2055, milp=0.013s
+  Testing total segment budget: 78 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=78): width=8.3021, ilp=0.002s, milp=0.046s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=8.1081, milp=0.046s
+  Testing total segment budget: 104 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=104): width=6.9676, ilp=0.005s, milp=0.119s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=8.0116, milp=0.175s
+  Testing total segment budget: 130 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=5 (budget=130): width=6.5132, ilp=0.004s, milp=0.737s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.9379, milp=0.455s
+  Testing total segment budget: 156 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=6 (budget=156): width=5.8306, ilp=0.005s, milp=0.802s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=6: width=6.5504, milp=0.676s
+  Testing total segment budget: 182 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=7 (budget=182): width=5.6628, ilp=0.003s, milp=2.589s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=7: width=5.6628, milp=2.596s
+  Input sweep allocations: delta-based uses 130 segments (5.0/spline); equal-budget uses 130 (Van k=5 uses 130)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 130 segs): width=5.3730, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 130 segs): width=5.3730, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=5.5821, milp=0.015s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 130 segs): width=5.3957, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 130 segs): width=5.3957, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=5.6191, milp=0.014s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 130 segs): width=5.4194, milp=0.014s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 130 segs): width=5.4194, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=5.6567, milp=0.025s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 130 segs): width=5.5971, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 130 segs): width=5.5971, milp=0.015s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=5.9240, milp=0.035s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 130 segs): width=6.0804, milp=0.078s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 130 segs): width=6.0804, milp=0.078s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.1071, milp=0.077s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 130 segs): width=6.1877, milp=0.130s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 130 segs): width=6.1877, milp=0.131s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.8484, milp=0.087s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 130 segs): width=6.5132, milp=0.739s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 130 segs): width=6.5132, milp=0.732s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=6.9379, milp=0.460s
+Saved graph data to logs/graph_data_functionexp4.json
+
+=== functionexp100 ===
+  theoretical min error: 2.4260, n_splines: 101, dp_time: 0.222s
+  Testing total segment budget: 202 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=202): width=1.9138, ilp=0.007s, milp=0.017s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=2.2674, milp=0.014s
+  Testing total segment budget: 303 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=303): width=1.9137, ilp=0.011s, milp=0.029s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=2.6134, milp=0.017s
+  Testing total segment budget: 404 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=404): width=1.9137, ilp=0.012s, milp=0.027s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=2.2416, milp=0.027s
+  Testing total segment budget: 505 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=5 (budget=505): width=1.9136, ilp=0.011s, milp=0.027s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.2007, milp=0.016s
+  Testing total segment budget: 606 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=6 (budget=606): width=1.8875, ilp=0.010s, milp=0.028s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=6: width=1.9137, milp=0.028s
+  Testing total segment budget: 707 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=7 (budget=707): width=1.8875, ilp=0.008s, milp=0.026s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=7: width=1.8875, milp=0.027s
+  Input sweep allocations: delta-based uses 505 segments (5.0/spline); equal-budget uses 505 (Van k=5 uses 505)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 505 segs): width=1.8524, milp=0.017s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 505 segs): width=1.8524, milp=0.054s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.1993, milp=0.017s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 505 segs): width=1.8526, milp=0.016s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 505 segs): width=1.8526, milp=0.016s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.1993, milp=0.015s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 505 segs): width=1.8529, milp=0.017s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 505 segs): width=1.8529, milp=0.016s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.1993, milp=0.016s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 505 segs): width=1.8539, milp=0.016s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 505 segs): width=1.8539, milp=0.017s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.1994, milp=0.017s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 505 segs): width=1.8744, milp=0.027s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 505 segs): width=1.8744, milp=0.027s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.1995, milp=0.017s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 505 segs): width=1.9132, milp=0.027s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 505 segs): width=1.9132, milp=0.027s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.1996, milp=0.028s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (delta, 505 segs): width=1.9136, milp=0.038s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt (eq-budget, 505 segs): width=1.9136, milp=0.027s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=5: width=2.2007, milp=0.037s
+Saved graph data to logs/graph_data_functionexp100.json
+
+=== funcnoise ===
+  theoretical min error: 10.5344, n_splines: 164, dp_time: 0.188s
+  Testing total segment budget: 328 (k=2 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=2 (budget=328): width=4.0451, ilp=0.011s, milp=0.026s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=2: width=3.4848, milp=0.057s
+  Testing total segment budget: 492 (k=3 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=3 (budget=492): width=3.6374, ilp=0.011s, milp=0.162s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=3: width=3.7774, milp=0.731s
+  Testing total segment budget: 656 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Opt k=4 (budget=656): width=3.7127, ilp=0.010s, milp=54.753s
+Set parameter Method to value 6
+Set parameter Presolve to value -1
+    Van k=4: width=3.7005, milp=26.632s
+  Testing total segment budget: 820 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter Presolve to value -1
