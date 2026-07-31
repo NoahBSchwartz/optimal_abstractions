@@ -322,3 +322,8 @@ Set parameter Presolve to value -1
 Set parameter Method to value 6
 Set parameter TimeLimit to value 1000
 Set parameter Presolve to value -1
+    Van k=3: width=10.7079, milp=2000.457s
+  Testing total segment budget: 26624 (k=4 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
