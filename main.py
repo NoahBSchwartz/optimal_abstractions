@@ -16,12 +16,13 @@ from joblib import Parallel, delayed
 log_filename    = "logs/verification_log.txt"
 MODEL_DIR       = 'model_pkls'
 # FILENAME_FILTER = ["xy", "exp100", "pinn", "exp4"]
+# FILENAME_FILTER = ["prosthetic", "weather", "acopf_ml4acopf_"]
 FILENAME_FILTER = ["func"]
 EXCLUDE         = []
 SEGMENT_COUNTS  = [2, 3, 4, 5, 6, 7]
 INPUT_WIDTHS    = [0.01, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0]
 TIME_LIMIT      = 1000
-MIP_GAP         = 0.01
+MIP_GAP         = 0.05
 MAX_SEGMENTS    = SEGMENT_COUNTS[-1]
 FIXED_IW        = INPUT_WIDTHS[-1]
 K_MID           = SEGMENT_COUNTS[len(SEGMENT_COUNTS) // 2]
@@ -348,6 +349,7 @@ def solve_best_segment_allocation(weighted_error_tables, target_max_error):
     model = gp.Model()
     model.setParam("Method", 6)
     model.setParam("OutputFlag", 0)
+    model.setParam("TimeLimit", TIME_LIMIT)
     x = {}
     binary_vars_for_splines = {}
     for spline_key, num_segment_options in weighted_error_tables.items():
@@ -428,6 +430,7 @@ def propagate_kan_intervals(kan_shape, segments_tables, error_tables, optimal_al
 def build_kan_milp_model(kan_shape, segments_tables, error_tables, optimal_allocation, x_min_vec, x_max_vec):
     model = gp.Model()
     model.setParam("Method", 6)
+    model.setParam("TimeLimit", TIME_LIMIT)
     input_dim = kan_shape[0]
     all_layer_variables = []
 
@@ -483,6 +486,7 @@ def solve_kan_interval_milp(kan_shape, segments_tables, error_tables, optimal_al
     model, all_layer_variables = build_kan_milp_model(kan_shape, segments_tables, error_tables, optimal_allocation, x_min_vec, x_max_vec)
     model.setParam("PreSolve", -1)
     model.setParam("OutputFlag", 0)
+    model.setParam("TimeLimit", time_limit)
 
     for layer_idx, vars_in_layer in enumerate(all_layer_variables):
         lbs, ubs = precomputed_bounds[layer_idx]
@@ -530,55 +534,54 @@ def solve_kan_interval_milp(kan_shape, segments_tables, error_tables, optimal_al
     return min_bounds, max_bounds
 
 
-def verify_mlp_gurobi_lib(model, input_lb, input_ub, output_layer_mip_gap=0.05, timeout=300):
-    from gurobi_ml import add_predictor_constr
-    start_time = time.time()
-    m = gp.Model("mlp_verification_lib")
-    model.setParam("Method", 6)
-    m.setParam("OutputFlag", 0)
-    input_dim = len(input_lb)
-    input_vars = m.addMVar((1, input_dim), lb=input_lb, ub=input_ub, name="input")
-    pred_constr = add_predictor_constr(m, model.network, input_vars)
-    output_mvar = pred_constr.output
-    m.update()
-    output_vars_list = output_mvar.tolist()[0]
-    target_indices = [v.index for v in output_vars_list]
+# def verify_mlp_gurobi_lib(model, input_lb, input_ub, output_layer_mip_gap=0.05, timeout=300):
+#     from gurobi_ml import add_predictor_constr
+#     start_time = time.time()
+#     m = gp.Model("mlp_verification_lib")
+#     m.setParam("Method", 6)
+#     m.setParam("OutputFlag", 0)
+#     input_dim = len(input_lb)
+#     input_vars = m.addMVar((1, input_dim), lb=input_lb, ub=input_ub, name="input")
+#     pred_constr = add_predictor_constr(m, model.network, input_vars)
+#     output_mvar = pred_constr.output
+#     m.update()
+#     output_vars_list = output_mvar.tolist()[0]
+#     target_indices = [v.index for v in output_vars_list]
 
-    def solve_single_neuron(var_index):
-        local_model = m.copy()
-        local_model.setParam("MIPGap", output_layer_mip_gap)
-        local_model.setParam("TimeLimit", timeout)
-        local_model.setParam("Threads", 1)
-        local_model.setParam("OutputFlag", 0)
-        target_var = local_model.getVars()[var_index]
+#     def solve_single_neuron(var_index):
+#         local_model = m.copy()
+#         local_model.setParam("MIPGap", output_layer_mip_gap)
+#         local_model.setParam("TimeLimit", timeout)
+#         local_model.setParam("Threads", 1)
+#         local_model.setParam("OutputFlag", 0)
+#         target_var = local_model.getVars()[var_index]
 
-        local_model.setObjective(target_var, GRB.MINIMIZE)
-        local_model.optimize()
-        if local_model.status == GRB.OPTIMAL:
-            min_val = local_model.ObjVal
-        elif local_model.status == GRB.TIME_LIMIT:
-            min_val = local_model.ObjBound
-        else:
-            min_val = -float("inf")
+#         local_model.setObjective(target_var, GRB.MINIMIZE)
+#         local_model.optimize()
+#         if local_model.status == GRB.OPTIMAL:
+#             min_val = local_model.ObjVal
+#         elif local_model.status == GRB.TIME_LIMIT:
+#             min_val = local_model.ObjBound
+#         else:
+#             min_val = -float("inf")
 
-        local_model.setObjective(target_var, GRB.MAXIMIZE)
-        local_model.optimize()
-        if local_model.status == GRB.OPTIMAL:
-            max_val = local_model.ObjVal
-        elif local_model.status == GRB.TIME_LIMIT:
-            max_val = local_model.ObjBound
-        else:
-            max_val = float("inf")
-        return min_val, max_val
+#         local_model.setObjective(target_var, GRB.MAXIMIZE)
+#         local_model.optimize()
+#         if local_model.status == GRB.OPTIMAL:
+#             max_val = local_model.ObjVal
+#         elif local_model.status == GRB.TIME_LIMIT:
+#             max_val = local_model.ObjBound
+#         else:
+#             max_val = float("inf")
+#         return min_val, max_val
 
-    if len(target_indices) >= MAX_NEURON_TO_SOLVE:
-        target_indices = target_indices[:MAX_NEURON_TO_SOLVE]
-    results = Parallel(n_jobs=-1, backend="threading")(delayed(solve_single_neuron)(idx) for idx in target_indices)
-    min_outputs = np.array([r[0] for r in results])
-    max_outputs = np.array([r[1] for r in results])
-    total_time = time.time() - start_time
-    return min_outputs, max_outputs, total_time
-
+#     if len(target_indices) >= MAX_NEURON_TO_SOLVE:
+#         target_indices = target_indices[:MAX_NEURON_TO_SOLVE]
+#     results = Parallel(n_jobs=-1, backend="threading")(delayed(solve_single_neuron)(idx) for idx in target_indices)
+#     min_outputs = np.array([r[0] for r in results])
+#     max_outputs = np.array([r[1] for r in results])
+#     total_time = time.time() - start_time
+#     return min_outputs, max_outputs, total_time
 
 class DualLogger:
     def __init__(self, filename):
@@ -699,6 +702,8 @@ def width(min_o, max_o):
 def allocate_segments_under_budget(weighted_error_tables, total_budget):
     model = gp.Model()
     model.setParam("OutputFlag", 0)
+    model.setParam("TimeLimit", TIME_LIMIT)
+    model.setParam("Method", 6)
     x = {}
     binary_vars_for_splines = {}
     for spline_key, options in weighted_error_tables.items():
