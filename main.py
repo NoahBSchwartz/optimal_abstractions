@@ -16,14 +16,14 @@ from joblib import Parallel, delayed
 log_filename    = "logs/verification_log.txt"
 MODEL_DIR       = 'model_pkls'
 # FILENAME_FILTER = ["xy", "exp100", "pinn", "exp4"]
-FILENAME_FILTER = ["xy", "exp100"]#"prosthetic", "weather", "acopf_ml4acopf_"]
+FILENAME_FILTER = ["xy", "exp100", "prosthetic", "weather", "func", "pinn"]
 # FILENAME_FILTER = ["func"]
 EXCLUDE         = []
 SEGMENT_COUNTS  = [2, 3, 4, 5, 6, 7]
 INPUT_WIDTHS    = [0.01, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0]
 TIME_LIMIT      = 1000
 MIP_GAP         = 0.05
-MAX_SEGMENTS    = SEGMENT_COUNTS[-1]
+MAX_SEGMENTS    = SEGMENT_COUNTS[-1] * 2
 FIXED_IW        = INPUT_WIDTHS[-1]
 K_MID           = SEGMENT_COUNTS[len(SEGMENT_COUNTS) // 2]
 MAX_NEURON_TO_SOLVE = 5
@@ -767,6 +767,7 @@ def compute_true_vanilla_tables(curves, k):
 
 graph_data = {}
 curves_by_prefix, shape_by_prefix, tables_by_prefix = {}, {}, {}
+print(pairs)
 
 for prefix, pair in sorted(pairs.items(), key=lambda kv: os.path.getsize(os.path.join(MODEL_DIR, kv[1]["kan"]))):
     if "kan" not in pair: continue
