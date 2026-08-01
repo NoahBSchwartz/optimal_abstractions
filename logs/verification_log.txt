@@ -327,3 +327,126 @@ Set parameter Presolve to value -1
 Set parameter Method to value 6
 Set parameter TimeLimit to value 1000
 Set parameter Presolve to value -1
+    Opt k=4 (budget=26624): width=10.1053, ilp=0.813s, milp=2000.283s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=4: width=10.7662, milp=2003.688s
+  Testing total segment budget: 33280 (k=5 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt k=5 (budget=33280): width=10.0602, ilp=0.689s, milp=2000.351s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=10.5457, milp=2000.465s
+  Testing total segment budget: 39936 (k=6 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt k=6 (budget=39936): width=9.7334, ilp=0.628s, milp=2001.109s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=6: width=10.0745, milp=2000.479s
+  Testing total segment budget: 46592 (k=7 per spline for Van)
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt k=7 (budget=46592): width=9.6897, ilp=0.298s, milp=2000.305s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=7: width=9.6881, milp=2000.318s
+  Input sweep allocations: delta-based uses 33280 segments (5.0/spline); equal-budget uses 33280 (Van k=5 uses 33280)
+  Testing input width: 0.01 (bounds=(-0.005, 0.005))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 33280 segs): width=3.9337, milp=0.323s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 33280 segs): width=3.9337, milp=0.281s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=4.2649, milp=0.562s
+  Testing input width: 0.05 (bounds=(-0.025, 0.025))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 33280 segs): width=3.9648, milp=0.396s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 33280 segs): width=3.9648, milp=0.333s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=4.2989, milp=0.868s
+  Testing input width: 0.1 (bounds=(-0.050, 0.050))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 33280 segs): width=4.0051, milp=0.414s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 33280 segs): width=4.0051, milp=0.470s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=4.3382, milp=1.290s
+  Testing input width: 0.5 (bounds=(-0.250, 0.250))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 33280 segs): width=4.3362, milp=3.667s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 33280 segs): width=4.3362, milp=3.605s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=4.6770, milp=8.142s
+  Testing input width: 1.0 (bounds=(-0.500, 0.500))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 33280 segs): width=4.7390, milp=95.542s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 33280 segs): width=4.7390, milp=93.366s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=5.0872, milp=256.422s
+  Testing input width: 2.0 (bounds=(-1.000, 1.000))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 33280 segs): width=6.1314, milp=2000.373s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 33280 segs): width=6.1374, milp=2000.497s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Van k=5: width=6.4944, milp=2000.437s
+  Testing input width: 5.0 (bounds=(-2.500, 2.500))
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (delta, 33280 segs): width=10.0582, milp=2000.370s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
+    Opt (eq-budget, 33280 segs): width=10.0580, milp=2000.301s
+Set parameter Method to value 6
+Set parameter TimeLimit to value 1000
+Set parameter Presolve to value -1
